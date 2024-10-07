@@ -11,7 +11,7 @@ experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](h
 status](https://www.r-pkg.org/badges/version/hexsession)](https://CRAN.R-project.org/package=hexsession)
 <!-- badges: end -->
 
-The goal of hexsession is to create tile of hexagonal logos for each
+The goal of hexsession is to create a tile of hexagonal logos for each
 loaded package in a session (all packages attached to the search path
 except for base packages).
 
@@ -62,16 +62,23 @@ library(patchwork)
 hexsession::make_tile()
 ```
 
-The output would look like this: ![](man/figures/exampletile.png)
+The output would look like this: ![](man/figures/hsdemo.gif) *I don’t
+know how to show the rendered interactive file on the GitHub readme, if
+anyone does please let me know 😅.*
 
-Once downloaded, the
+Once downloaded to your machine and opened in a browser, the
 [hexout_example.html](inst/extdata/hexout_example.html) shows the
-interactive, responsive HTML version that adapts to the size of the
-browser window and includes hyperlinks to each package website.
+interactive, responsive HTML version with cool hover effects that adapts
+to the size of the browser window and includes hyperlinks to each
+package website.
 
 To save a static version of the hex tile, we call `snap_tile()` with a
 path to the output image and optionally, height and width values to
 change the viewport size.
+
+The result:
+
+![](man/figures/exampletile.png)
 
 ## Notes
 

@@ -20,7 +20,7 @@ knitr::opts_chunk$set(
 [![CRAN status](https://www.r-pkg.org/badges/version/hexsession)](https://CRAN.R-project.org/package=hexsession)
 <!-- badges: end -->
 
-The goal of hexsession is to create tile of hexagonal logos for each loaded package in a session (all packages attached to the search path except for base packages). 
+The goal of hexsession is to create a tile of hexagonal logos for each loaded package in a session (all packages attached to the search path except for base packages). 
 
 ## Installation
 
@@ -65,12 +65,16 @@ hexsession::make_tile()
 ```
 
 The output would look like this: 
-![](man/figures/exampletile.png)
+![](man/figures/hsdemo.gif)
+_I don't know how to show the rendered interactive file on the GitHub readme, if anyone does please let me know 😅._
 
-Once downloaded, the [hexout_example.html](inst/extdata/hexout_example.html) shows the interactive, responsive HTML version that adapts to the size of the browser window and includes hyperlinks to each package website.
+Once downloaded to your machine and opened in a browser, the [hexout_example.html](inst/extdata/hexout_example.html) shows the interactive, responsive HTML version with cool hover effects that adapts to the size of the browser window and includes hyperlinks to each package website.
 
 To save a static version of the hex tile, we call `snap_tile()` with a path to the output image and optionally, height and width values to change the viewport size. 
 
+The result: 
+
+![](man/figures/exampletile.png)
 
 ## Notes
 
