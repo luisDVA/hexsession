@@ -21,7 +21,7 @@ You can install the development version of hexsession like so:
 
 ``` r
 # install.packages("remotes)
-remotes::install_github("luisdva/hexsession)
+remotes::install_github("luisdva/hexsession")
 ```
 
 ## Using hexsession
@@ -64,7 +64,8 @@ hexsession::make_tile()
 
 The output would look like this: ![](man/figures/exampletile.png)
 
-The [hexout_example.html](inst/extdata/hexout_example.html) shows the
+Once downloaded, the
+[hexout_example.html](inst/extdata/hexout_example.html) shows the
 interactive, responsive HTML version that adapts to the size of the
 browser window and includes hyperlinks to each package website.
 
@@ -84,7 +85,7 @@ directories, use system commands, and launch browser sessions.
 
 All feedback is welcome in any form (issues, pull requests, etc.)
 
-### Credit
+### Credit and LLM disclosure statement
 
 - css and html code for the responsive hex grid comes from [this
   tutorial](https://css-tricks.com/hexagons-and-beyond-flexible-responsive-grid-patterns-sans-media-queries/)

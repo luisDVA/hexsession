@@ -67,7 +67,7 @@ hexsession::make_tile()
 The output would look like this: 
 ![](man/figures/exampletile.png)
 
-The [hexout_example.html](inst/extdata/hexout_example.html) shows the interactive, responsive HTML version that adapts to the size of the browser window and includes hyperlinks to each package website.
+Once downloaded, the [hexout_example.html](inst/extdata/hexout_example.html) shows the interactive, responsive HTML version that adapts to the size of the browser window and includes hyperlinks to each package website.
 
 To save a static version of the hex tile, we call `snap_tile()` with a path to the output image and optionally, height and width values to change the viewport size. 
 
