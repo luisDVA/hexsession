@@ -145,21 +145,28 @@ document.addEventListener('DOMContentLoaded', function() {
 
   imagePaths.forEach((path, index) => {
     const div = document.createElement('div');
-    const a = document.createElement('a');
     const img = document.createElement('img');
     
     img.src = path;
     img.alt = 'Hexagon Image ' + (index + 1);
     
-    a.href = linkUrls[index];
-    a.target = '_blank';  // Opens link in a new tab
+    if (linkUrls[index] && linkUrls[index] !== "NA") {
+      // If there's a valid URL, wrap the image in a link
+      const a = document.createElement('a');
+      a.href = linkUrls[index];
+      a.target = '_blank';  // Opens link in a new tab
+      a.appendChild(img);
+      div.appendChild(a);
+    } else {
+      // If there's no URL or it's "NA", just add the image without a link
+      div.appendChild(img);
+    }
     
-    a.appendChild(img);
-    div.appendChild(a);
     container.appendChild(div);
   });
 });
 </script>
+
 
 
 
