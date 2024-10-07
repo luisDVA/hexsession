@@ -31,9 +31,10 @@ find_logopaths <- function(imagepaths) {
 
 #' Get package URLs
 #' @param pkgnames Character vector of package names
+#' @importFrom utils packageDescription
 #' @return A vector of package URLs
 pkgurls <- function(pkgnames) {
-  allurls <- purrr::map(pkgnames,\(x) packageDescription(x,field="URL"))
+  allurls <- purrr::map(pkgnames,\(x) packageDescription(x,fields="URL"))
   splturls <- purrr::map(allurls,\(x) unlist(strsplit(x,",|\n")))
   purrr::map_chr(splturls,`[`,1)
 }
