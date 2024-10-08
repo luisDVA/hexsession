@@ -3,6 +3,8 @@ execute:
   echo: false
 params:
   temp_file_path: "package_data.rds"
+  js_file_path: "hexsession.js"
+  dark_mode: false
 resources:
   - images
 embed-resources: true
@@ -11,37 +13,13 @@ embed-resources: true
 ```{r}
 #| echo: false
 
-library(fs)
-library(tools)
-library(base64enc)
-
-# Read the package data from the temporary file
-package_data <- readRDS(params$temp_file_path)
-logopaths <- package_data$logopaths
-urlsForlinks <- package_data$urls
 
 
-# Encode images and get base64 strings
-encoded_paths <- sapply(logopaths, hexsession::encode_image)
+library(htmltools)
 
-# Remove any NULL entries (failed encodings)
-encoded_paths <- encoded_paths[!sapply(encoded_paths, is.null)]
-
-# Ensure urlsForlinks matches the length of encoded_paths
-urlsForlinks <- urlsForlinks[1:length(encoded_paths)]
-
-# Convert the R vectors to JavaScript arrays
-js_array_images <- paste0("const imagePaths = ", 
-                   jsonlite::toJSON(encoded_paths, auto_unbox = TRUE), 
-                   ";")
-js_array_links <- paste0("const linkUrls = ", 
-                   jsonlite::toJSON(urlsForlinks, auto_unbox = TRUE), 
-                   ";")
-
-# Make the JS arrays available to the HTML output
+# Include the JavaScript file
 htmltools::tagList(
-  htmltools::tags$script(js_array_images),
-  htmltools::tags$script(js_array_links)
+  htmltools::tags$script(src = params$js_file_path)
 )
 ```
 
@@ -56,6 +34,11 @@ htmltools::tagList(
 </div>
 
 <style>
+body {
+  background-color: var(--bg-color);
+  color: var(--text-color);
+}
+
 .main {
   position: relative;
   display: flex;
@@ -75,7 +58,7 @@ htmltools::tagList(
   display: inline-block;
   font-size: initial;
   clip-path: polygon(0% 25%, 0% 75%, 50% 100%, 100% 75%, 100% 25%, 50% 0%);
-  background: #f0f0f0;  /* Light grey background */
+  background: var(--tile-bg);
   margin-bottom: calc(var(--m) - var(--s)*0.2885); 
   overflow: hidden;
   transition: all 0.3s ease;
@@ -120,8 +103,8 @@ htmltools::tagList(
   bottom: -44px;
   right: 40px;
   font-size: 0.8em;
-  color: #666;
-  background-color: rgba(255, 255, 255, 0.7);
+  color: var(--text-color);
+  background-color: var(--attribution-bg);
   padding: 2px 5px;
   border-radius: 3px;
   z-index: 10;
@@ -129,7 +112,7 @@ htmltools::tagList(
 }
 
 .attribution a {
-  color: #0066cc;
+  color: var(--link-color);
   text-decoration: none;
   pointer-events: auto;  /* Re-enables clicking on the link */
 }
@@ -139,36 +122,4 @@ htmltools::tagList(
 }
 </style>
 
-<script>
-document.addEventListener('DOMContentLoaded', function() {
-  const container = document.getElementById('imageContainer');
-
-  imagePaths.forEach((path, index) => {
-    const div = document.createElement('div');
-    const img = document.createElement('img');
-    
-    img.src = path;
-    img.alt = 'Hexagon Image ' + (index + 1);
-    
-    if (linkUrls[index] && linkUrls[index] !== "NA") {
-      // If there's a valid URL, wrap the image in a link
-      const a = document.createElement('a');
-      a.href = linkUrls[index];
-      a.target = '_blank';  // Opens link in a new tab
-      a.appendChild(img);
-      div.appendChild(a);
-    } else {
-      // If there's no URL or it's "NA", just add the image without a link
-      div.appendChild(img);
-    }
-    
-    container.appendChild(div);
-  });
-});
-</script>
-
-
-
-
 ```
-

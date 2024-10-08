@@ -80,6 +80,16 @@ The result:
 
 ![](man/figures/exampletile.png)
 
+### Dark mode
+
+To draw the tiles on a dark background, set `dark_mode` to `TRUE` when
+creating or capturing your hex logos.
+
+``` r
+hexsession::make_tile(dark_mode = TRUE)
+hexsession::snap_tile("test.png",dark_mode = TRUE)
+```
+
 ## Notes
 
 This packages depends on working installations of magick, Quarto, and

@@ -3,13 +3,17 @@
 #' @param output_path Path to image file
 #' @param screen_width Width of the browser window
 #' @param screen_height Height of the browser window
+#' @param dark_mode Is the tile being saved dark or light mode?
 #' @return Path to the saved image
 #' @export
-#'
 snap_tile <- function(output_path,
                       screen_width = 800,
-                      screen_height = 700) {
+                      screen_height = 700,
+                      dark_mode=FALSE) {
 
+  b_color <- if(dark_mode==TRUE) {
+    "black"
+  } else "white"
 
   html_path <- "temp_hexsession/hexout.html"
 
@@ -48,7 +52,7 @@ snap_tile <- function(output_path,
   tryCatch({
     magick::image_read(temppath) |>
       magick::image_trim() |>
-      magick::image_border("white", "10x10") |>
+      magick::image_border(b_color, "10x10") |>
       magick::image_shadow() |>
       magick::image_write(output_path, format = "png", density=300)
 

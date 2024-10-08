@@ -4,7 +4,12 @@
 \alias{snap_tile}
 \title{Take screenshot of html image tile}
 \usage{
-snap_tile(output_path, screen_width = 800, screen_height = 700)
+snap_tile(
+  output_path,
+  screen_width = 800,
+  screen_height = 700,
+  dark_mode = FALSE
+)
 }
 \arguments{
 \item{output_path}{Path to image file}
@@ -12,6 +17,8 @@ snap_tile(output_path, screen_width = 800, screen_height = 700)
 \item{screen_width}{Width of the browser window}
 
 \item{screen_height}{Height of the browser window}
+
+\item{dark_mode}{Is the tile being saved dark or light mode?}
 }
 \value{
 Path to the saved image

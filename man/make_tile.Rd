@@ -4,10 +4,13 @@
 \alias{make_tile}
 \title{Generate tile of package logos}
 \usage{
-make_tile()
+make_tile(dark_mode = FALSE)
+}
+\arguments{
+\item{dark_mode}{Draw the tile on a dark background?}
 }
 \value{
-Path to the output file.
+Path to the output file
 }
 \description{
 Generate tile of package logos
