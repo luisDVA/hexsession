@@ -98,6 +98,14 @@
 <p>To save a static version of the hex tile, we call <code><a href="reference/snap_tile.html">snap_tile()</a></code> with a path to the output image and optionally, height and width values to change the viewport size.</p>
 <p>The result:</p>
 <p><img src="reference/figures/exampletile.png"></p>
+<div class="section level3">
+<h3 id="dark-mode">Dark mode<a class="anchor" aria-label="anchor" href="#dark-mode"></a>
+</h3>
+<p>To draw the tiles on a dark background, set <code>dark_mode</code> to <code>TRUE</code> when creating or capturing your hex logos.</p>
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu">hexsession</span><span class="fu">::</span><span class="fu"><a href="reference/make_tile.html">make_tile</a></span><span class="op">(</span>dark_mode <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
+<span><span class="fu">hexsession</span><span class="fu">::</span><span class="fu"><a href="reference/snap_tile.html">snap_tile</a></span><span class="op">(</span><span class="st">"test.png"</span>,dark_mode <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
+</div>
 </div>
 <div class="section level2">
 <h2 id="notes">Notes<a class="anchor" aria-label="anchor" href="#notes"></a>
