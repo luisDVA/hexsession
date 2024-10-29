@@ -4,10 +4,12 @@
 \alias{find_logopaths}
 \title{Find logo paths}
 \usage{
-find_logopaths(imagepaths)
+find_logopaths(imagepaths, pkgnames)
 }
 \arguments{
 \item{imagepaths}{List of image paths}
+
+\item{pkgnames}{Character vector of package names}
 }
 \value{
 A vector of logo paths

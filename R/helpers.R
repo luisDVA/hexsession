@@ -48,9 +48,10 @@ find_imgpaths <- function(pkgnames) {
 }
 #' Find logo paths
 #' @param imagepaths List of image paths
+#' @param pkgnames Character vector of package names
 #' @return A vector of logo paths
-find_logopaths <- function(imagepaths){
-  logopaths <- purrr::map(imagepaths, function(x) {
+find_logopaths <- function(imagepaths, pkgnames){
+  logopaths <- purrr::map2(imagepaths, pkgnames, function(x, pkg) {
     logo_matches <- x[grepl("logo", x, ignore.case = TRUE)]
 
     if (length(logo_matches) == 0 && length(x) > 0) {
@@ -58,7 +59,7 @@ find_logopaths <- function(imagepaths){
 
       choice <- utils::menu(
         choices = choices,
-        title = "No images match 'logo'. Please select the image with the package logo:"
+        title = sprintf("Package: %s - No images match 'logo'. Please select the image with the package logo:", pkg)
       )
 
       if (choice > 0 && choice <= length(x)) {
@@ -72,7 +73,8 @@ find_logopaths <- function(imagepaths){
       return(NA_character_)
     }
   })
-   unlist(logopaths)
+  
+  unlist(logopaths)
 }
 
 #' Get package URLs
