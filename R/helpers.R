@@ -12,24 +12,67 @@ getLoaded <- function() {
 #' Find image paths
 #' @param pkgnames Character vector of package names
 #' @return A list of image file paths for each package
+#' @details
+#' Images in svg format will be converted to png. When no image matches 'logo'
+#' in the file name the used is will be prompted to select likely logos.
 find_imgpaths <- function(pkgnames) {
   lapply(pkgnames, function(x) {
-    list.files(system.file(package = x),
+    img_files <- list.files(system.file(package = x),
       pattern = "\\.png$|\\.jpg$|\\.svg$",
       recursive = TRUE,
       full.names = TRUE
     )
+
+    # Convert SVG to PNG if necessary
+    img_files <- lapply(img_files, function(file) {
+      if (tools::file_ext(file) == "svg") {
+        # Create a new filename with "converted" prefix
+        file_dir <- tempdir()
+        file_name <- basename(file)
+        new_file_name <- paste0("converted_", tools::file_path_sans_ext(file_name), ".png")
+        png_file <- file.path(file_dir, new_file_name)
+
+        # Convert SVG to PNG
+
+          magick::image_write(
+            magick::image_read_svg(file),
+            png_file, format = "png")
+
+        return(png_file)
+      }
+      return(file)
+    })
+
+    unlist(img_files)
   })
 }
-
 #' Find logo paths
 #' @param imagepaths List of image paths
 #' @return A vector of logo paths
-find_logopaths <- function(imagepaths) {
-  logopaths <- lapply(imagepaths, function(x) x[grepl("logo", x, ignore.case = TRUE)])
-  logopaths[lengths(logopaths) == 0] <- NA_character_
-  logopaths <- sapply(logopaths, "[[", 1)
-  unlist(logopaths)
+find_logopaths <- function(imagepaths){
+  logopaths <- purrr::map(imagepaths, function(x) {
+    logo_matches <- x[grepl("logo", x, ignore.case = TRUE)]
+
+    if (length(logo_matches) == 0 && length(x) > 0) {
+      choices <- c(basename(x), "None of the above")
+
+      choice <- utils::menu(
+        choices = choices,
+        title = "No images match 'logo'. Please select the image with the package logo:"
+      )
+
+      if (choice > 0 && choice <= length(x)) {
+        return(x[choice])
+      } else {
+        return(NA_character_)
+      }
+    } else if (length(logo_matches) > 0) {
+      return(logo_matches[1])
+    } else {
+      return(NA_character_)
+    }
+  })
+   unlist(logopaths)
 }
 
 #' Get package URLs
