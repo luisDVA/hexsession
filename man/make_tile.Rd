@@ -4,10 +4,12 @@
 \alias{make_tile}
 \title{Generate tile of package logos}
 \usage{
-make_tile(dark_mode = FALSE)
+make_tile(dark_mode = FALSE, packages = NULL)
 }
 \arguments{
 \item{dark_mode}{Draw the tile on a dark background?}
+
+\item{packages}{Character vector of package names to include (default: NULL, which uses loaded packages)}
 }
 \value{
 Path to the output file

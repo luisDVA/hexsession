@@ -11,9 +11,11 @@ experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](h
 status](https://www.r-pkg.org/badges/version/hexsession)](https://CRAN.R-project.org/package=hexsession)
 <!-- badges: end -->
 
-The goal of hexsession is to create a tile of hexagonal logos for each
-loaded package in a session (all packages attached to the search path
-except for base packages).
+The goal of hexsession is to create a tile of hexagonal logos for
+packages installed on your machine. Tiles can be created for a set of
+packages specified with a character vector, or for the loaded packages
+in your session (all packages attached to the search path except for
+base packages).
 
 ## Installation
 
@@ -32,11 +34,18 @@ not have a logo bundled in `man/figures/` or if the image cannot be
 found easily, a generic-looking logo with the package name will be
 generated.
 
+- svg files are internally converted to png
+- If the images bundled with a package do not match ‘logo’, a users are
+  prompted to specify which file to use.
+
 For a given session with libraries loaded in addition to base packages:
 
 ``` r
 library(hexsession)
 make_tile()
+
+# custom set of packages
+make_tile(packages=c("terra","sf","tidyr"))
 ```
 
 The `make_tile()` function will render the HTML output in a new folder

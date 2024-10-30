@@ -2,13 +2,16 @@
 % Please edit documentation in R/get_package_data.R
 \name{get_pkg_data}
 \alias{get_pkg_data}
-\title{Get package logos and urls}
+\title{Get package data}
 \usage{
-get_pkg_data()
+get_pkg_data(packages = NULL)
+}
+\arguments{
+\item{packages}{Character vector of package names (default is NULL, uses loaded packages)}
 }
 \value{
-A list with paths to logos and URLs for loaded packages
+A list containing logopaths and urls for the packages
 }
 \description{
-Get package logos and urls
+Get package data
 }
