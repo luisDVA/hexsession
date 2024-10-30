@@ -59,7 +59,7 @@
 </div>
 <!-- badges: start -->
 
-<p>The goal of hexsession is to create a tile of hexagonal logos for each loaded package in a session (all packages attached to the search path except for base packages).</p>
+<p>The goal of hexsession is to create a tile of hexagonal logos for packages installed on your machine. Tiles can be created for a set of packages specified with a character vector, or for the loaded packages in your session (all packages attached to the search path except for base packages).</p>
 <div class="section level2">
 <h2 id="installation">Installation<a class="anchor" aria-label="anchor" href="#installation"></a>
 </h2>
@@ -72,10 +72,17 @@
 <h2 id="using-hexsession">Using hexsession<a class="anchor" aria-label="anchor" href="#using-hexsession"></a>
 </h2>
 <p>With hexsession installed, we can create a self-contained HTML file with tiled hex logos for all loaded packages in a session. If a package does not have a logo bundled in <code>man/figures/</code> or if the image cannot be found easily, a generic-looking logo with the package name will be generated.</p>
+<ul>
+<li>svg files are internally converted to png</li>
+<li>If the images bundled with a package do not match ‘logo’, a users are prompted to specify which file to use.</li>
+</ul>
 <p>For a given session with libraries loaded in addition to base packages:</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/luisDVA/hexsession" class="external-link">hexsession</a></span><span class="op">)</span></span>
-<span><span class="fu"><a href="reference/make_tile.html">make_tile</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+<span><span class="fu"><a href="reference/make_tile.html">make_tile</a></span><span class="op">(</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># custom set of packages</span></span>
+<span><span class="fu"><a href="reference/make_tile.html">make_tile</a></span><span class="op">(</span>packages<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"terra"</span>,<span class="st">"sf"</span>,<span class="st">"tidyr"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <p>The <code><a href="reference/make_tile.html">make_tile()</a></code> function will render the HTML output in a new folder in the working directory using a Quarto template file that will also be copied to this new directory.</p>
 <p>For a session with the following packages loaded:</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
