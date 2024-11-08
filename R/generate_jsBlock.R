@@ -51,7 +51,8 @@ document.addEventListener("DOMContentLoaded", function() {
     document.documentElement.style.setProperty("--link-color", "#0066cc");
   }
 
-  imagePaths.forEach((path, index) => {
+  // Ensure imagePaths is always iterable
+  (Array.isArray(imagePaths) ? imagePaths : [imagePaths]).forEach((path, index) => {
     const div = document.createElement("div");
     const img = document.createElement("img");
 

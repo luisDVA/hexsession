@@ -136,7 +136,15 @@ make_missingLogos <- function(attached_pkgs, logopaths) {
   }
 
   logoimgs <- purrr::map(pending, create_logo)
+ # single-logo tiles
+  if (!is.list(logoimgs)) {
+    logoimgs <- list(logoimgs)
+  }
+  
   imgpaths <- paste0(tempfile(), "_", pending, ".png")
-  purrr::walk2(logoimgs, imgpaths, \(x, y) magick::image_write(x, y))
-  imgpaths
+
+  purrr::walk2(logoimgs, imgpaths, 
+    \(x, y) magick::image_write(x, y))
+  
+    as.list(imgpaths)
 }
