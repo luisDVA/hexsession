@@ -35,8 +35,9 @@ found easily, a generic-looking logo with the package name will be
 generated.
 
 - svg files are internally converted to png
-- If the images bundled with a package do not match ‘logo’, a users are
-  prompted to specify which file to use.
+- If the images bundled with a package do not match ‘hex’ or ‘logo’, or
+  there are multiple possible options, users are prompted to specify
+  which file to use.
 
 For a given session with libraries loaded in addition to base packages:
 

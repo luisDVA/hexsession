@@ -52,7 +52,7 @@ find_imgpaths <- function(pkgnames) {
 #' @return A vector of logo paths
 find_logopaths <- function(imagepaths, pkgnames){
   logopaths <- purrr::map2(imagepaths, pkgnames, function(x, pkg) {
-    logo_matches <- x[grepl("logo", x, ignore.case = TRUE)]
+    logo_matches <- x[grepl("hex|logo", x, ignore.case = TRUE)]
 
     if (length(logo_matches) == 0 && length(x) > 0) {
       choices <- c(basename(x), "None of the above")
@@ -73,7 +73,7 @@ find_logopaths <- function(imagepaths, pkgnames){
       return(NA_character_)
     }
   })
-  
+
   unlist(logopaths)
 }
 
@@ -140,11 +140,11 @@ make_missingLogos <- function(attached_pkgs, logopaths) {
   if (!is.list(logoimgs)) {
     logoimgs <- list(logoimgs)
   }
-  
+
   imgpaths <- paste0(tempfile(), "_", pending, ".png")
 
-  purrr::walk2(logoimgs, imgpaths, 
+  purrr::walk2(logoimgs, imgpaths,
     \(x, y) magick::image_write(x, y))
-  
+
     as.list(imgpaths)
 }
