@@ -100,6 +100,19 @@ hexsession::make_tile(dark_mode = TRUE)
 hexsession::snap_tile("test.png",dark_mode = TRUE)
 ```
 
+## User-provided images and urls
+
+`make_tile` can now take vectors of additional images and their
+respective but optional urls to include in the hex grid.
+
+``` r
+make_tile(packages = c("tidyterra", "sf"), 
+          local_images = c("path/to/your/image1.png", 
+                           "path/to/your/image2.png",
+          local_urls = c("https://an-example.web",  "https://another-example.com"))
+          
+```
+
 ## Notes
 
 This packages depends on working installations of magick, Quarto, and
