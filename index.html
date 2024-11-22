@@ -115,6 +115,16 @@
 </div>
 </div>
 <div class="section level2">
+<h2 id="user-provided-images-and-urls">User-provided images and urls<a class="anchor" aria-label="anchor" href="#user-provided-images-and-urls"></a>
+</h2>
+<p><code>make_tile</code> can now take vectors of additional images and their respective but optional urls to include in the hex grid.</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" tabindex="-1"></a><span class="fu">make_tile</span>(<span class="at">packages =</span> <span class="fu">c</span>(<span class="st">"tidyterra"</span>, <span class="st">"sf"</span>), </span>
+<span id="cb5-2"><a href="#cb5-2" tabindex="-1"></a>          <span class="at">local_images =</span> <span class="fu">c</span>(<span class="st">"path/to/your/image1.png"</span>, </span>
+<span id="cb5-3"><a href="#cb5-3" tabindex="-1"></a>                           <span class="st">"path/to/your/image2.png"</span>,</span>
+<span id="cb5-4"><a href="#cb5-4" tabindex="-1"></a>          <span class="at">local_urls =</span> <span class="fu">c</span>(<span class="st">"https://an-example.web"</span>,  <span class="st">"https://another-example.com"</span>))</span>
+<span id="cb5-5"><a href="#cb5-5" tabindex="-1"></a>          </span></code></pre></div>
+</div>
+<div class="section level2">
 <h2 id="notes">Notes<a class="anchor" aria-label="anchor" href="#notes"></a>
 </h2>
 <p>This packages depends on working installations of magick, Quarto, and chromote and thus needs a Chromium-based web browser (e.g., Chrome, Chromium, Opera, or Vivaldi) installation.</p>

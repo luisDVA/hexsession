@@ -37,19 +37,27 @@
 
     <div class="section level2">
     <h2 id="ref-usage">Usage<a class="anchor" aria-label="anchor" href="#ref-usage"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">make_tile</span><span class="op">(</span>dark_mode <span class="op">=</span> <span class="cn">FALSE</span>, packages <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span></span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">make_tile</span><span class="op">(</span>packages <span class="op">=</span> <span class="cn">NULL</span>, local_images <span class="op">=</span> <span class="cn">NULL</span>, dark_mode <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div class="section level2">
     <h2 id="arguments">Arguments<a class="anchor" aria-label="anchor" href="#arguments"></a></h2>
 
 
-<dl><dt id="arg-dark-mode">dark_mode<a class="anchor" aria-label="anchor" href="#arg-dark-mode"></a></dt>
+<dl><dt id="arg-packages">packages<a class="anchor" aria-label="anchor" href="#arg-packages"></a></dt>
+<dd><p>Character vector of package names to include (default: NULL, which uses loaded packages)</p></dd>
+
+
+<dt id="arg-local-images">local_images<a class="anchor" aria-label="anchor" href="#arg-local-images"></a></dt>
+<dd><p>Optional character vector of local image paths to add to the tile</p></dd>
+
+
+<dt id="arg-dark-mode">dark_mode<a class="anchor" aria-label="anchor" href="#arg-dark-mode"></a></dt>
 <dd><p>Draw the tile on a dark background?</p></dd>
 
 
-<dt id="arg-packages">packages<a class="anchor" aria-label="anchor" href="#arg-packages"></a></dt>
-<dd><p>Character vector of package names to include (default: NULL, which uses loaded packages)</p></dd>
+<dt id="arg-local-urls">local_urls<a class="anchor" aria-label="anchor" href="#arg-local-urls"></a></dt>
+<dd><p>Optional character vector of URLs for each of the local images passed</p></dd>
 
 </dl></div>
     <div class="section level2">
