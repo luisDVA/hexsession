@@ -36,7 +36,7 @@ remotes::install_github("luisdva/hexsession")
 With hexsession installed, we can create a self-contained HTML file with tiled hex logos for all loaded packages in a session. If a package does not have a logo bundled in `man/figures/` or if the image cannot be found easily, a generic-looking logo with the package name will be generated.
 
 * svg files are internally converted to png
-* If the images bundled with a package do not match 'logo', a users are prompted to specify which file to use.
+* If the images bundled with a package do not match 'hex' or 'logo', or there are multiple possible options, users are prompted to specify which file to use.
 
 
 
