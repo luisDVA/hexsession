@@ -46,6 +46,7 @@ find_imgpaths <- function(pkgnames) {
     unlist(img_files)
   })
 }
+
 #' Find logo paths
 #' @param imagepaths List of image paths
 #' @param pkgnames Character vector of package names
@@ -67,8 +68,21 @@ find_logopaths <- function(imagepaths, pkgnames){
       } else {
         return(NA_character_)
       }
-    } else if (length(logo_matches) > 0) {
+    } else if (length(logo_matches) == 1) {
       return(logo_matches[1])
+    } else if (length(logo_matches) > 1) {
+      choices <- c(basename(logo_matches), "None of the above")
+      
+      choice <- utils::menu(
+        choices = choices,
+        title = sprintf("Package: %s - Multiple possible logos. Please select the image to use:", pkg)
+  )
+      
+      if (choice > 0 && choice <= length(logo_matches)) {
+        return(logo_matches[choice])
+      } else {
+        return(NA_character_)
+}
     } else {
       return(NA_character_)
     }
@@ -93,8 +107,6 @@ pkgurls <- function(pkgnames) {
     if (all(is.na(x))) NA_character_ else x[1]
   })
 }
-
-
 
 #' Encode image to Base64
 #' @param file_path Path to an image file
