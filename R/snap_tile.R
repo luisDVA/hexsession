@@ -9,9 +9,9 @@
 snap_tile <- function(output_path,
                       screen_width = 800,
                       screen_height = 700,
-                      dark_mode=FALSE) {
+                      dark_mode = FALSE) {
 
-  b_color <- if(dark_mode==TRUE) {
+  b_color <- if(dark_mode == TRUE) {
     "black"
   } else "white"
 
@@ -29,7 +29,7 @@ snap_tile <- function(output_path,
     b$screenshot(
       temppath,
       selector = selector,
-      scale=2,
+      scale = 2,
       delay = 2
     )
   }
@@ -54,7 +54,8 @@ snap_tile <- function(output_path,
       magick::image_trim() |>
       magick::image_border(b_color, "10x10") |>
       magick::image_shadow() |>
-      magick::image_write(output_path, format = "png", density=300)
+      magick::image_write(output_path, format = "png",
+                          density = 300)
 
     cat("Image processed and saved to:", output_path, "\n")
   }, error = function(e) {
