@@ -8,54 +8,36 @@
 #' @importFrom jsonlite toJSON
 #' @importFrom base64enc base64encode
 #' @export
-make_tile <- function(packages=NULL, local_images=NULL,local_urls=NULL, dark_mode=FALSE) {
-# Create a temporary directory in the current working directory
-temp_dir <- file.path(getwd(), "temp_hexsession")
-dir.create(temp_dir, showWarnings = FALSE)
+make_tile <- function(packages=NULL, local_images=NULL, local_urls=NULL, dark_mode=FALSE) {
+  temp_dir <- file.path(getwd(), "temp_hexsession")
+  dir.create(temp_dir, showWarnings = FALSE)
 
-  
-# Generate package data and save to temporary file in the temp directory
-package_data <- get_pkg_data(packages)
+  package_data <- get_pkg_data(packages)
 
-  # Check if local_images is provided and is a character vector
-  if (!is.null(local_images) && is.character(local_images)) {
-    # Check if local_urls is provided
-    if (!is.null(local_urls)) {
-      # If local_urls is shorter than local_images, fill with NA
-      if (length(local_urls) < length(local_images)) {
-        local_urls <- c(local_urls, rep(NA, length(local_images) - length(local_urls)))
-      }
-    } else {
-      # If local_urls is not provided, fill with NA
-      local_urls <- rep(NA, length(local_images))
-    }
-    
-    # Add local images and urls to the package data
-    package_data$logopaths <- c(package_data$logopaths, local_images)
-    package_data$urls <- c(package_data$urls, local_urls)
+  all_logopaths <- c(package_data$logopaths, local_images)
+  all_urls <- c(package_data$urls, local_urls)
+
+  if (length(all_urls) < length(all_logopaths)) {
+    all_urls <- c(all_urls, rep(NA, length(all_logopaths) - length(all_urls)))
+  } else if (length(all_urls) > length(all_logopaths)) {
+    all_urls <- all_urls[1:length(all_logopaths)]
   }
-  
-temp_file <- file.path(temp_dir, "package_data.rds")
-saveRDS(package_data, temp_file)
 
-# Generate JavaScript file
-js_file <- file.path(temp_dir, "hexsession.js")
-generate_hexsession_js(package_data$logopaths, package_data$urls, dark_mode, js_file)
+  temp_file <- file.path(temp_dir, "package_data.rds")
+  saveRDS(list(logopaths = all_logopaths, urls = all_urls), temp_file)
 
-# Path to the Quarto template
-template_path <- system.file("templates", "hexout.qmd", package = "hexsession")
+  js_file <- file.path(temp_dir, "hexsession.js")
+  generate_hexsession_js(all_logopaths, all_urls, dark_mode, js_file)
 
-# Copy the template to the temp directory
-file.copy(template_path, file.path(temp_dir, "hexout.qmd"), overwrite = TRUE)
+  template_path <- system.file("templates", "hexout.qmd", package = "hexsession")
+  file.copy(template_path, file.path(temp_dir, "hexout.qmd"), overwrite = TRUE)
 
-# Build and run the Quarto cli render call
-quarto_call <-
-      sprintf(
-        'quarto render "%s" -P dark_mode:%s',
-        file.path(temp_dir, "hexout.qmd"),tolower(as.character(dark_mode))
-      )
-system(quarto_call)
+  quarto_call <- sprintf(
+    'quarto render "%s" -P dark_mode:%s',
+    file.path(temp_dir, "hexout.qmd"), tolower(as.character(dark_mode))
+  )
+  system(quarto_call)
 
-    viewer <- getOption("viewer")
-    viewer("temp_hexsession/hexout.html")
+  viewer <- getOption("viewer")
+  viewer("temp_hexsession/hexout.html")
 }

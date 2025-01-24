@@ -10,33 +10,34 @@
 #'
 #' @export
 generate_hexsession_js <- function(logopaths, urls, dark_mode, output_js) {
-  # Encode images and get base64 strings
-  encoded_paths <- sapply(logopaths, function(path) {
+  encoded_paths <- vector("character", length(logopaths))
+  for (i in seq_along(logopaths)) {
     tryCatch({
-      encoded <- base64enc::base64encode(path)
-      ext <- tolower(tools::file_ext(path))
-      paste0("data:image/", ext, ";base64,", encoded)
+      encoded <- base64enc::base64encode(logopaths[i])
+      ext <- tolower(tools::file_ext(logopaths[i]))
+      encoded_paths[i] <- paste0("data:image/", ext, ";base64,", encoded)
     }, error = function(e) {
-      warning(paste("Error encoding file:", path, "-", e$message))
-      NULL
+      warning(paste("Error encoding file:", logopaths[i], "-", e$message))
+      encoded_paths[i] <- NA_character_
     })
+  }
+
+  image_url_pairs <- lapply(seq_along(encoded_paths), function(i) {
+    list(
+      image = encoded_paths[i],
+      url = if (is.na(urls[i]) || urls[i] == "NA") NULL else as.character(urls[i])
+    )
   })
 
-  # Remove any NULL entries (failed encodings)
-  encoded_paths <- encoded_paths[!sapply(encoded_paths, is.null)]
-
-  # Ensure urls matches the length of encoded_paths
-  urls <- urls[1:length(encoded_paths)]
+  image_url_pairs <- image_url_pairs[!is.na(sapply(image_url_pairs, function(x) x$image))]
 
   js_content <- sprintf('
-const imagePaths = %s;
-const linkUrls = %s;
+const imageUrlPairs = %s;
 const darkMode = %s;
 
 document.addEventListener("DOMContentLoaded", function() {
   const container = document.getElementById("imageContainer");
 
-  // Set color scheme based on dark mode
   if (darkMode) {
     document.documentElement.style.setProperty("--bg-color", "#1a1a1a");
     document.documentElement.style.setProperty("--text-color", "#ffffff");
@@ -51,17 +52,16 @@ document.addEventListener("DOMContentLoaded", function() {
     document.documentElement.style.setProperty("--link-color", "#0066cc");
   }
 
-  // Ensure imagePaths is always iterable
-  (Array.isArray(imagePaths) ? imagePaths : [imagePaths]).forEach((path, index) => {
+  imageUrlPairs.forEach((pair, index) => {
     const div = document.createElement("div");
     const img = document.createElement("img");
 
-    img.src = path;
+    img.src = pair.image;
     img.alt = "Hexagon Image " + (index + 1);
 
-    if (linkUrls[index] && linkUrls[index] !== "NA") {
+    if (pair.url && typeof pair.url === "string") {
       const a = document.createElement("a");
-      a.href = linkUrls[index];
+      a.href = pair.url;
       a.target = "_blank";
       a.appendChild(img);
       div.appendChild(a);
@@ -73,9 +73,8 @@ document.addEventListener("DOMContentLoaded", function() {
   });
 });
 ',
-                        jsonlite::toJSON(encoded_paths, auto_unbox = TRUE),
-                        jsonlite::toJSON(urls, auto_unbox = TRUE),
-                        tolower(as.character(dark_mode))
+    jsonlite::toJSON(image_url_pairs, auto_unbox = TRUE),
+    tolower(as.character(dark_mode))
   )
 
   writeLines(js_content, output_js)
