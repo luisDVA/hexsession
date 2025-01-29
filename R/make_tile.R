@@ -29,15 +29,15 @@ make_tile <- function(packages=NULL, local_images=NULL, local_urls=NULL, dark_mo
   js_file <- file.path(temp_dir, "hexsession.js")
   generate_hexsession_js(all_logopaths, all_urls, dark_mode, js_file)
 
-  template_path <- system.file("templates", "hexout.qmd", package = "hexsession")
-  file.copy(template_path, file.path(temp_dir, "hexout.qmd"), overwrite = TRUE)
+  template_path <- system.file("templates", "_hexout.qmd", package = "hexsession")
+  file.copy(template_path, file.path(temp_dir, "_hexout.qmd"), overwrite = TRUE)
 
   quarto_call <- sprintf(
     'quarto render "%s" -P dark_mode:%s',
-    file.path(temp_dir, "hexout.qmd"), tolower(as.character(dark_mode))
+    file.path(temp_dir, "_hexout.qmd"), tolower(as.character(dark_mode))
   )
   system(quarto_call)
 
   viewer <- getOption("viewer")
-  viewer("temp_hexsession/hexout.html")
+  viewer("temp_hexsession/_hexout.html")
 }
