@@ -38,6 +38,12 @@ make_tile <- function(packages=NULL, local_images=NULL, local_urls=NULL, dark_mo
   )
   system(quarto_call)
 
-  viewer <- getOption("viewer")
-  viewer("temp_hexsession/_hexout.html")
+  if (isTRUE(getOption("knitr.in.progress"))) {
+    html_content <- readChar(file.path(temp_dir, "_hexout.html"), file.info(file.path(temp_dir, "_hexout.html"))$size)
+    options(htmltools.dir.version = FALSE)
+    structure(html_content, class = "knit_asis")
+  } else if (isFALSE(getOption("knitr.in.progress"))) {
+    viewer <- getOption("viewer")
+    viewer("temp_hexsession/_hexout.html")
+  }
 }
