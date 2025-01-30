@@ -1,5 +1,12 @@
 #' Generate tile of package logos
 #'
+#' @description
+#' This function returns an interactive html tile view of the packages either
+#' listed in the `packages` option, or all of the loaded packages. When rendered
+#' in interactively, it is output in the viewer. When rendered in quarto or
+#' rmarkdown it is input as part of the html.
+#'
+#'
 #' @param packages Character vector of package names to include (default: NULL, which uses loaded packages)
 #' @param dark_mode Draw the tile on a dark background?
 #' @param local_images Optional character vector of local image paths to add to the tile

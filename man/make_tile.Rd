@@ -4,20 +4,28 @@
 \alias{make_tile}
 \title{Generate tile of package logos}
 \usage{
-make_tile(packages = NULL, local_images = NULL, dark_mode = FALSE)
+make_tile(
+  packages = NULL,
+  local_images = NULL,
+  local_urls = NULL,
+  dark_mode = FALSE
+)
 }
 \arguments{
 \item{packages}{Character vector of package names to include (default: NULL, which uses loaded packages)}
 
 \item{local_images}{Optional character vector of local image paths to add to the tile}
 
-\item{dark_mode}{Draw the tile on a dark background?}
-
 \item{local_urls}{Optional character vector of URLs for each of the local images passed}
+
+\item{dark_mode}{Draw the tile on a dark background?}
 }
 \value{
 Path to the output file
 }
 \description{
-Generate tile of package logos
+This function returns an interactive html tile view of the packages either
+listed in the \code{packages} option, or all of the loaded packages. When rendered
+in interactively, it is output in the viewer. When rendered in quarto or
+rmarkdown it is input as part of the html.
 }
