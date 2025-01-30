@@ -14,6 +14,8 @@
 #' @return Path to the output file
 #' @importFrom jsonlite toJSON
 #' @importFrom base64enc base64encode
+#' @importFrom knitr is_html_output
+#' @importFrom htmltools HTML
 #' @export
 make_tile <- function(packages=NULL, local_images=NULL, local_urls=NULL, dark_mode=FALSE) {
   temp_dir <- file.path(getwd(), "temp_hexsession")
@@ -45,7 +47,7 @@ make_tile <- function(packages=NULL, local_images=NULL, local_urls=NULL, dark_mo
   )
   system(quarto_call)
 
-  if (isTRUE(getOption("knitr.in.progress"))) {
+  if (isTRUE(getOption("knitr.in.progress")) && knitr::is_html_output()) {
     # Read the HTML content directly
     html_content <- readLines(file.path(temp_dir, "_hexout.html"), warn = FALSE)
 
