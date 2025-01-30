@@ -38,12 +38,23 @@ make_tile <- function(packages=NULL, local_images=NULL, local_urls=NULL, dark_mo
   )
   system(quarto_call)
 
-  # Check if we're in a knitr context
   if (isTRUE(getOption("knitr.in.progress"))) {
-    # Read HTML content and render with htmltools, handling incomplete lines
-    html_content <- readLines(file.path(temp_dir, "_hexout.html"),
-                        warn = FALSE) # Warn false to suppress incomplete line warning
-    htmltools::HTML(html_content)
+    # Read the HTML content directly
+    html_content <- readLines(file.path(temp_dir, "_hexout.html"), warn = FALSE)
+
+    # Extract just the body content
+    body_content <- paste(html_content[grep("<body.*?>", html_content):grep("</body>", html_content)], collapse = "\n")
+    body_content <- gsub("</?body.*?>", "", body_content)
+
+    # Create a div container with the content
+    div_content <- sprintf(
+      '<div class="hexsession-container" style="width:100%%; height:100%%; overflow:hidden;">%s</div>',
+      body_content
+    )
+
+    # Return the HTML content directly
+    return(htmltools::HTML(div_content))
+
   } else if (isFALSE(getOption("knitr.in.progress"))) {
     viewer <- getOption("viewer")
     viewer(file.path(temp_dir, "_hexout.html"))
