@@ -38,12 +38,14 @@ make_tile <- function(packages=NULL, local_images=NULL, local_urls=NULL, dark_mo
   )
   system(quarto_call)
 
+  # Check if we're in a knitr context
   if (isTRUE(getOption("knitr.in.progress"))) {
-    html_content <- readChar(file.path(temp_dir, "_hexout.html"), file.info(file.path(temp_dir, "_hexout.html"))$size)
-    options(htmltools.dir.version = FALSE)
-    structure(html_content, class = "knit_asis")
+    # Read HTML content and render with htmltools, handling incomplete lines
+    html_content <- readLines(file.path(temp_dir, "_hexout.html"),
+                        warn = FALSE) # Warn false to suppress incomplete line warning
+    htmltools::HTML(html_content)
   } else if (isFALSE(getOption("knitr.in.progress"))) {
     viewer <- getOption("viewer")
-    viewer("temp_hexsession/_hexout.html")
+    viewer(file.path(temp_dir, "_hexout.html"))
   }
 }
