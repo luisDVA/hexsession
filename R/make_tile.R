@@ -11,6 +11,7 @@
 #' @param dark_mode Draw the tile on a dark background?
 #' @param local_images Optional character vector of local image paths to add to the tile
 #' @param local_urls Optional character vector of URLs for each of the local images passed
+#' @param color_arrange Logical, whether to arrange the images by color along the 'Lab' color space (defaults to FALSE)
 #' @return Path to the output file
 #' @importFrom jsonlite toJSON
 #' @importFrom base64enc base64encode
@@ -18,7 +19,8 @@
 #' @importFrom htmltools HTML
 #' @export
 make_tile <- function(packages = NULL, local_images = NULL,
-                      local_urls = NULL, dark_mode = FALSE) {
+                      local_urls = NULL, dark_mode = FALSE,
+                      color_arrange = FALSE) {
   temp_dir <- file.path(getwd(), "temp_hexsession")
   dir.create(temp_dir, showWarnings = FALSE)
 
@@ -36,6 +38,13 @@ make_tile <- function(packages = NULL, local_images = NULL,
     all_urls <- c(all_urls, rep(NA, length(all_logopaths) - length(all_urls)))
   } else if (length(all_urls) > length(all_logopaths)) {
     all_urls <- all_urls[1:length(all_logopaths)]
+  }
+
+  # Arrange images by color if requested
+  if (color_arrange) {
+    laborder <- col_arrange(all_logopaths)
+    all_logopaths <- all_logopaths[order(match(all_logopaths,laborder))]
+    all_urls <- all_urls[order(match(all_logopaths,laborder))]
   }
 
   temp_file <- file.path(temp_dir, "package_data.rds")

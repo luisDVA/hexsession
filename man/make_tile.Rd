@@ -8,7 +8,8 @@ make_tile(
   packages = NULL,
   local_images = NULL,
   local_urls = NULL,
-  dark_mode = FALSE
+  dark_mode = FALSE,
+  color_arrange = FALSE
 )
 }
 \arguments{
@@ -19,6 +20,8 @@ make_tile(
 \item{local_urls}{Optional character vector of URLs for each of the local images passed}
 
 \item{dark_mode}{Draw the tile on a dark background?}
+
+\item{color_arrange}{Logical, whether to arrange the images by color along the 'Lab' color space (defaults to FALSE)}
 }
 \value{
 Path to the output file

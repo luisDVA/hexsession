@@ -42,13 +42,14 @@ body {
 .main {
   position: relative;
   display: flex;
-  --s: 100px;  /* size  */
+  --s: 100px;  /* size */
   --m: 2px;    /* margin */
   --f: calc(1.732 * var(--s) + 4 * var(--m) - 1px);
 }
 
 .container {
   font-size: 0; /*disable white space between inline block element */
+  max-width: 100%; /* Ensure container doesn't overflow */
 }
 
 .container div {
@@ -119,6 +120,19 @@ body {
 
 .attribution a:hover {
   text-decoration: underline;
+}
+
+/* Media queries for responsiveness */
+@media screen and (max-width: 1200px) {
+  .main {
+    --s: 96px;  /* Slightly reduce size for smaller screens */
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .main {
+    --s: 80px;  /* Smaller for mobile devices, but still visible */
+  }
 }
 </style>
 
