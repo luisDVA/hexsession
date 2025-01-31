@@ -3,8 +3,8 @@
 #' @description
 #' This function returns an interactive html tile view of the packages either
 #' listed in the `packages` option, or all of the loaded packages. When rendered
-#' in interactively, it is output in the viewer. When rendered in quarto or
-#' rmarkdown it is input as part of the html.
+#' interactively, the result is output in the viewer. When rendered in Quarto or
+#' RMarkdown, the tile becomes part of the rendered html.
 #'
 #'
 #' @param packages Character vector of package names to include (default: NULL, which uses loaded packages)
