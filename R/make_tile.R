@@ -17,7 +17,8 @@
 #' @importFrom knitr is_html_output
 #' @importFrom htmltools HTML
 #' @export
-make_tile <- function(packages=NULL, local_images=NULL, local_urls=NULL, dark_mode=FALSE) {
+make_tile <- function(packages = NULL, local_images = NULL,
+                      local_urls = NULL, dark_mode = FALSE) {
   temp_dir <- file.path(getwd(), "temp_hexsession")
   dir.create(temp_dir, showWarnings = FALSE)
 
@@ -29,7 +30,7 @@ make_tile <- function(packages=NULL, local_images=NULL, local_urls=NULL, dark_mo
   if (length(all_urls) < length(all_logopaths)) {
     all_urls <- c(all_urls, rep(NA, length(all_logopaths) - length(all_urls)))
   } else if (length(all_urls) > length(all_logopaths)) {
-    all_urls <- all_urls[1:length(all_logopaths)]
+    all_urls <- all_urls[1:seq_along(all_logopaths)]
   }
 
   temp_file <- file.path(temp_dir, "package_data.rds")

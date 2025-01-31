@@ -34,9 +34,9 @@ find_imgpaths <- function(pkgnames) {
 
         # Convert SVG to PNG
 
-          magick::image_write(
-            magick::image_read_svg(file),
-            png_file, format = "png")
+        magick::image_write(
+          magick::image_read_svg(file),
+          png_file, format = "png")
 
         return(png_file)
       }
@@ -51,7 +51,7 @@ find_imgpaths <- function(pkgnames) {
 #' @param imagepaths List of image paths
 #' @param pkgnames Character vector of package names
 #' @return A vector of logo paths
-find_logopaths <- function(imagepaths, pkgnames){
+find_logopaths <- function(imagepaths, pkgnames) {
   logopaths <- purrr::map2(imagepaths, pkgnames, function(x, pkg) {
     logo_matches <- x[grepl("hex|logo", x, ignore.case = TRUE)]
 
@@ -72,12 +72,12 @@ find_logopaths <- function(imagepaths, pkgnames){
       return(logo_matches[1])
     } else if (length(logo_matches) > 1) {
       choices <- c(basename(logo_matches), "None of the above")
-      
+
       choice <- utils::menu(
         choices = choices,
         title = sprintf("Package: %s - Multiple possible logos. Please select the image to use:", pkg)
-  )
-      
+        )
+
       if (choice > 0 && choice <= length(logo_matches)) {
         return(logo_matches[choice])
       } else {

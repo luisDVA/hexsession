@@ -6,7 +6,7 @@ get_pkg_data <- function(packages = NULL) {
     packages <- getLoaded()
   } else {
     # Check if specified packages are installed
-    not_installed <- packages[!packages %in% installed.packages()[,"Package"]]
+    not_installed <- packages[!packages %in% installed.packages()[, "Package"]]
     if (length(not_installed) > 0) {
       stop("The following packages are not installed: ", paste(not_installed, collapse = ", "))
     }
@@ -14,14 +14,14 @@ get_pkg_data <- function(packages = NULL) {
 
   imagepaths <- find_imgpaths(packages)
   logopaths <- find_logopaths(imagepaths, packages)
-  
+
   # Generate missing logos
   missing <- is.na(logopaths)
   if (any(missing)) {
     generated <- make_missingLogos(packages[missing], logopaths[missing])
     logopaths[missing] <- generated
   }
-  
+
   # Get package URLs
   urls <- sapply(packages, function(pkg) {
     desc <- packageDescription(pkg)
@@ -32,6 +32,6 @@ get_pkg_data <- function(packages = NULL) {
       strsplit(url, ",")[[1]][1]  # Use the first URL if multiple are provided
     }
   })
-  
+
   list(logopaths = logopaths, urls = urls)
 }
