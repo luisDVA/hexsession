@@ -1,5 +1,12 @@
 #' Generate tile of package logos
 #'
+#' @description
+#' This function returns an interactive html tile view of the packages either
+#' listed in the `packages` option, or all of the loaded packages. When rendered
+#' in interactively, it is output in the viewer. When rendered in quarto or
+#' rmarkdown it is input as part of the html.
+#'
+#'
 #' @param packages Character vector of package names to include (default: NULL, which uses loaded packages)
 #' @param dark_mode Draw the tile on a dark background?
 #' @param local_images Optional character vector of local image paths to add to the tile
@@ -7,6 +14,8 @@
 #' @return Path to the output file
 #' @importFrom jsonlite toJSON
 #' @importFrom base64enc base64encode
+#' @importFrom knitr is_html_output
+#' @importFrom htmltools HTML
 #' @export
 make_tile <- function(packages=NULL, local_images=NULL, local_urls=NULL, dark_mode=FALSE) {
   temp_dir <- file.path(getwd(), "temp_hexsession")
@@ -38,6 +47,25 @@ make_tile <- function(packages=NULL, local_images=NULL, local_urls=NULL, dark_mo
   )
   system(quarto_call)
 
-  viewer <- getOption("viewer")
-  viewer("temp_hexsession/_hexout.html")
+  if (isTRUE(getOption("knitr.in.progress")) && knitr::is_html_output()) {
+    # Read the HTML content directly
+    html_content <- readLines(file.path(temp_dir, "_hexout.html"), warn = FALSE)
+
+    # Extract just the body content
+    body_content <- paste(html_content[grep("<body.*?>", html_content):grep("</body>", html_content)], collapse = "\n")
+    body_content <- gsub("</?body.*?>", "", body_content)
+
+    # Create a div container with the content
+    div_content <- sprintf(
+      '<div class="hexsession-container" style="width:100%%; height:100%%; overflow:hidden;">%s</div>',
+      body_content
+    )
+
+    # Return the HTML content directly
+    return(htmltools::HTML(div_content))
+
+  } else if (isFALSE(getOption("knitr.in.progress"))) {
+    viewer <- getOption("viewer")
+    viewer(file.path(temp_dir, "_hexout.html"))
+  }
 }

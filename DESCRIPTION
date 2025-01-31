@@ -1,12 +1,12 @@
 Package: hexsession
 Title: Create a tile of logos for loaded packages
 Version: 0.0.0.9000
-Authors@R: 
+Authors@R:
     person("Luis D.", "Verde Arregoitia", , "luis@liomys.mx", role = c("aut", "cre"),
            comment = c(ORCID = "0000-0001-9520-6543"))
 Description: Creates a responsive HTML file with tiled hex logos for all loaded packages in a session, which can be saved as a static screenshot in png format.
 License: MIT + file LICENSE
-Suggests: 
+Suggests:
     rsvg,
     testthat (>= 3.0.0)
 Config/testthat/edition: 3
@@ -15,9 +15,10 @@ Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.3.2.9000
 URL: https://github.com/luisDVA/hexsession, https://luisdva.github.io/hexsession/
 BugReports: https://github.com/luisDVA/hexsession/issues
-Imports: 
+Imports:
     base64enc,
     chromote,
     jsonlite,
     magick,
-    purrr
+    purrr,
+    htmltools
