@@ -4,8 +4,8 @@
 #' This function returns an interactive html tile view of the packages either
 #' listed in the `packages` option, or all of the loaded packages. When rendered
 #' interactively, the result is output in the viewer. When rendered in Quarto or
-#' RMarkdown, the tile becomes part of the rendered html.
-#'
+#' RMarkdown, the tile becomes part of the rendered html. If local images are provided,
+#' only these images will be used, excluding loaded packages.
 #'
 #' @param packages Character vector of package names to include (default: NULL, which uses loaded packages)
 #' @param dark_mode Draw the tile on a dark background?
@@ -22,15 +22,20 @@ make_tile <- function(packages = NULL, local_images = NULL,
   temp_dir <- file.path(getwd(), "temp_hexsession")
   dir.create(temp_dir, showWarnings = FALSE)
 
-  package_data <- get_pkg_data(packages)
+  if (is.null(local_images)) {
+    package_data <- get_pkg_data(packages)
+    all_logopaths <- package_data$logopaths
+    all_urls <- package_data$urls
+  } else {
+    all_logopaths <- local_images
+    all_urls <- local_urls
+  }
 
-  all_logopaths <- c(package_data$logopaths, local_images)
-  all_urls <- c(package_data$urls, local_urls)
-
+  # Ensure all_urls is the same length as all_logopaths
   if (length(all_urls) < length(all_logopaths)) {
     all_urls <- c(all_urls, rep(NA, length(all_logopaths) - length(all_urls)))
   } else if (length(all_urls) > length(all_logopaths)) {
-    all_urls <- all_urls[1:seq_along(all_logopaths)]
+    all_urls <- all_urls[1:length(all_logopaths)]
   }
 
   temp_file <- file.path(temp_dir, "package_data.rds")

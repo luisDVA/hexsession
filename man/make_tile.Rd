@@ -27,5 +27,6 @@ Path to the output file
 This function returns an interactive html tile view of the packages either
 listed in the \code{packages} option, or all of the loaded packages. When rendered
 interactively, the result is output in the viewer. When rendered in Quarto or
-RMarkdown, the tile becomes part of the rendered html.
+RMarkdown, the tile becomes part of the rendered html. If local images are provided,
+only these images will be used, excluding loaded packages.
 }
