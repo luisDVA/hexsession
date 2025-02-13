@@ -70,14 +70,28 @@ make_tile <- function(packages = NULL, local_images = NULL,
     body_content <- paste(html_content[grep("<body.*?>", html_content):grep("</body>", html_content)], collapse = "\n")
     body_content <- gsub("</?body.*?>", "", body_content)
 
+    # Custom CSS
+    custom_css <- '
+    <style>
+    .hexsession-container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin: 0 auto;
+    }
+    .hexsession-container > * {
+      max-width: 100%;
+    }
+    </style>
+    '
+
     # Create a div container with the content
     div_content <- sprintf(
-      '<div class="hexsession-container" style="width:100%%; height:100%%; overflow:hidden;">%s</div>',
+      '<div class="hexsession-container" style="width:100%%; max-width:100%%; overflow-x:auto; overflow-y:hidden;">%s</div>',
       body_content
     )
-
-    # Return the HTML content directly
-    return(htmltools::HTML(div_content))
+    # Return the HTML content directly with custom CSS
+    return(htmltools::HTML(paste0(custom_css, div_content)))
 
   } else if (isFALSE(getOption("knitr.in.progress"))) {
     viewer <- getOption("viewer")
