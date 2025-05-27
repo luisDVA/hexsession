@@ -40,6 +40,7 @@ make_tile <- function(packages = NULL, local_images = NULL,
     all_urls <- all_urls[1:length(all_logopaths)]
   }
 
+
   # Arrange images by color if requested
   if (color_arrange) {
     laborder <- col_arrange(all_logopaths)

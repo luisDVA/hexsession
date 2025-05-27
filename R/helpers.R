@@ -29,7 +29,7 @@ find_imgpaths <- function(pkgnames) {
         # Create a new filename with "converted" prefix
         file_dir <- tempdir()
         file_name <- basename(file)
-        new_file_name <- paste0("converted_", tools::file_path_sans_ext(file_name), ".png")
+        new_file_name <- paste0("converted_",x,"_", tools::file_path_sans_ext(file_name), ".png")
         png_file <- file.path(file_dir, new_file_name)
 
         # Convert SVG to PNG
