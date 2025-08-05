@@ -134,6 +134,7 @@ body {
     --s: 80px;  /* Smaller for mobile devices, but still visible */
   }
 }
-</style>
 
+</style>
 ```
+

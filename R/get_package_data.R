@@ -8,7 +8,10 @@ get_pkg_data <- function(packages = NULL) {
     # Check if specified packages are installed
     not_installed <- packages[!packages %in% installed.packages()[, "Package"]]
     if (length(not_installed) > 0) {
-      stop("The following packages are not installed: ", paste(not_installed, collapse = ", "))
+      stop(
+        "The following packages are not installed: ",
+        paste(not_installed, collapse = ", ")
+      )
     }
   }
 
@@ -29,7 +32,7 @@ get_pkg_data <- function(packages = NULL) {
     if (is.null(url)) {
       paste0("https://cran.r-project.org/package=", pkg)
     } else {
-      strsplit(url, ",")[[1]][1]  # Use the first URL if multiple are provided
+      strsplit(url, ",")[[1]][1] # Use the first URL if multiple are provided
     }
   })
 

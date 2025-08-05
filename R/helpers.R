@@ -3,8 +3,14 @@
 getLoaded <- function() {
   # also exclude hexsession
   basepkgs <- c(
-    "stats", "graphics", "grDevices", "utils", "datasets",
-    "methods", "base", "hexsession"
+    "stats",
+    "graphics",
+    "grDevices",
+    "utils",
+    "datasets",
+    "methods",
+    "base",
+    "hexsession"
   )
   (.packages())[!(.packages()) %in% basepkgs]
 }
@@ -17,7 +23,8 @@ getLoaded <- function() {
 #' in the file name the used is will be prompted to select likely logos.
 find_imgpaths <- function(pkgnames) {
   lapply(pkgnames, function(x) {
-    img_files <- list.files(system.file(package = x),
+    img_files <- list.files(
+      system.file(package = x),
       pattern = "\\.png$|\\.jpg$|\\.svg$",
       recursive = TRUE,
       full.names = TRUE
@@ -29,14 +36,22 @@ find_imgpaths <- function(pkgnames) {
         # Create a new filename with "converted" prefix
         file_dir <- tempdir()
         file_name <- basename(file)
-        new_file_name <- paste0("converted_",x,"_", tools::file_path_sans_ext(file_name), ".png")
+        new_file_name <- paste0(
+          "converted_",
+          x,
+          "_",
+          tools::file_path_sans_ext(file_name),
+          ".png"
+        )
         png_file <- file.path(file_dir, new_file_name)
 
         # Convert SVG to PNG
 
         magick::image_write(
           magick::image_read_svg(file),
-          png_file, format = "png")
+          png_file,
+          format = "png"
+        )
 
         return(png_file)
       }
@@ -60,7 +75,10 @@ find_logopaths <- function(imagepaths, pkgnames) {
 
       choice <- utils::menu(
         choices = choices,
-        title = sprintf("Package: %s - No images match 'logo'. Please select the image with the package logo:", pkg)
+        title = sprintf(
+          "Package: %s - No images match 'logo'. Please select the image with the package logo:",
+          pkg
+        )
       )
 
       if (choice > 0 && choice <= length(x)) {
@@ -75,14 +93,17 @@ find_logopaths <- function(imagepaths, pkgnames) {
 
       choice <- utils::menu(
         choices = choices,
-        title = sprintf("Package: %s - Multiple possible logos. Please select the image to use:", pkg)
+        title = sprintf(
+          "Package: %s - Multiple possible logos. Please select the image to use:",
+          pkg
         )
+      )
 
       if (choice > 0 && choice <= length(logo_matches)) {
         return(logo_matches[choice])
       } else {
         return(NA_character_)
-}
+      }
     } else {
       return(NA_character_)
     }
@@ -98,7 +119,11 @@ find_logopaths <- function(imagepaths, pkgnames) {
 pkgurls <- function(pkgnames) {
   allurls <- purrr::map(pkgnames, \(x) {
     url <- packageDescription(x, fields = "URL")
-    if (is.null(url) || all(is.na(url)) || all(url == "")) NA_character_ else url
+    if (is.null(url) || all(is.na(url)) || all(url == "")) {
+      NA_character_
+    } else {
+      url
+    }
   })
   splturls <- purrr::map(allurls, \(x) {
     if (all(is.na(x))) NA_character_ else unlist(strsplit(x, ",|\n"))
@@ -132,8 +157,11 @@ encode_image <- function(file_path) {
 #' @return Vector of paths to new logos
 make_missingLogos <- function(attached_pkgs, logopaths) {
   pending <- attached_pkgs[is.na(logopaths)]
-  basehex <- magick::image_read(system.file("extdata", "blankhexsm.png", package = "hexsession"))
-
+  basehex <- magick::image_read(system.file(
+    "extdata",
+    "blankhexsm.png",
+    package = "hexsession"
+  ))
 
   create_logo <- function(pkgname) {
     widthhex <- magick::image_info(basehex)$width
@@ -144,19 +172,23 @@ make_missingLogos <- function(attached_pkgs, logopaths) {
       magick::image_border("none") |>
       magick::image_resize(paste0(widthhex - 30, "x"))
 
-    magick::image_composite(basehex, fig, operator = "SrcOver", gravity = "center")
+    magick::image_composite(
+      basehex,
+      fig,
+      operator = "SrcOver",
+      gravity = "center"
+    )
   }
 
   logoimgs <- purrr::map(pending, create_logo)
- # single-logo tiles
+  # single-logo tiles
   if (!is.list(logoimgs)) {
     logoimgs <- list(logoimgs)
   }
 
   imgpaths <- paste0(tempfile(), "_", pending, ".png")
 
-  purrr::walk2(logoimgs, imgpaths,
-    \(x, y) magick::image_write(x, y))
+  purrr::walk2(logoimgs, imgpaths, \(x, y) magick::image_write(x, y))
 
-    as.list(imgpaths)
+  as.list(imgpaths)
 }

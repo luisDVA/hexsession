@@ -20,7 +20,7 @@ knitr::opts_chunk$set(
 [![CRAN status](https://www.r-pkg.org/badges/version/hexsession)](https://CRAN.R-project.org/package=hexsession)
 <!-- badges: end -->
 
-The goal of hexsession is to create a tile of hexagonal logos for packages installed on your machine. Tiles can be created for a set of packages specified with a character vector, or for the loaded packages in your  session (all packages attached to the search path except for base packages). 
+The goal of hexsession is to create a tile of hexagonal logos for packages installed on your machine. Tiles can be created for a set of packages specified with a character vector, or for the loaded packages in your session (all packages attached to the search path except for base packages). Also supports vectors with paths to local images.
 
 ## Installation
 
@@ -33,7 +33,7 @@ remotes::install_github("luisdva/hexsession")
 
 ## Using hexsession
 
-With hexsession installed, we can create a self-contained HTML file with tiled hex logos for all loaded packages in a session. If a package does not have a logo bundled in `man/figures/` or if the image cannot be found easily, a generic-looking logo with the package name will be generated.
+With hexsession installed, we can create a self-contained HTML file with tiled hex logos for all loaded packages in a session. If a package does not have a logo bundled in `man/figures/`, if the logos are added to .Rbuildignore, or if the image cannot be found easily, a generic-looking logo with the package name will be generated.
 
 * svg files are internally converted to png
 * If the images bundled with a package do not match 'hex' or 'logo', or there are multiple possible options, users are prompted to specify which file to use.
@@ -43,11 +43,9 @@ With hexsession installed, we can create a self-contained HTML file with tiled h
 For a given session with libraries loaded in addition to base packages: 
 
 ```{r example, eval=FALSE}
-library(hexsession)
-make_tile()
 
 # custom set of packages
-make_tile(packages=c("terra","sf","tidyr"))
+hexsession::make_tile(packages=c("terra","sf","tidyr"))
 ```
 
 The `make_tile()` function will render the HTML output in a new folder in the working directory using a Quarto template file that will also be copied to this new directory.
@@ -73,7 +71,6 @@ hexsession::make_tile()
 
 The output would look like this: 
 ![](man/figures/hsdemo.gif)
-_I don't know how to show the rendered interactive file on the GitHub readme, if anyone does please let me know 😅._
 
 Once downloaded to your machine and opened in a browser, the [hexout_example.html](inst/extdata/hexout_example.html) shows the interactive, responsive HTML version with cool hover effects that adapts to the size of the browser window and includes hyperlinks to each package website.
 
