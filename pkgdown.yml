@@ -2,7 +2,7 @@ pandoc: 3.1.11
 pkgdown: 2.1.3
 pkgdown_sha: ~
 articles: {}
-last_built: 2025-08-05T18:30Z
+last_built: 2025-08-05T18:36Z
 urls:
   reference: https://luisdva.github.io/hexsession/reference
   article: https://luisdva.github.io/hexsession/articles
