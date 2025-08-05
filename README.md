@@ -15,7 +15,7 @@ The goal of hexsession is to create a tile of hexagonal logos for
 packages installed on your machine. Tiles can be created for a set of
 packages specified with a character vector, or for the loaded packages
 in your session (all packages attached to the search path except for
-base packages).
+base packages). Also supports vectors with paths to local images.
 
 ## Installation
 
@@ -30,9 +30,9 @@ remotes::install_github("luisdva/hexsession")
 
 With hexsession installed, we can create a self-contained HTML file with
 tiled hex logos for all loaded packages in a session. If a package does
-not have a logo bundled in `man/figures/` or if the image cannot be
-found easily, a generic-looking logo with the package name will be
-generated.
+not have a logo bundled in `man/figures/`, if the logos are added to
+.Rbuildignore, or if the image cannot be found easily, a generic-looking
+logo with the package name will be generated.
 
 - svg files are internally converted to png
 - If the images bundled with a package do not match ‘hex’ or ‘logo’, or
@@ -42,11 +42,9 @@ generated.
 For a given session with libraries loaded in addition to base packages:
 
 ``` r
-library(hexsession)
-make_tile()
 
 # custom set of packages
-make_tile(packages=c("terra","sf","tidyr"))
+hexsession::make_tile(packages=c("terra","sf","tidyr"))
 ```
 
 The `make_tile()` function will render the HTML output in a new folder
@@ -72,9 +70,7 @@ library(patchwork)
 hexsession::make_tile()
 ```
 
-The output would look like this: ![](man/figures/hsdemo.gif) *I don’t
-know how to show the rendered interactive file on the GitHub readme, if
-anyone does please let me know 😅.*
+The output would look like this: ![](man/figures/hsdemo.gif)
 
 Once downloaded to your machine and opened in a browser, the
 [hexout_example.html](inst/extdata/hexout_example.html) shows the
