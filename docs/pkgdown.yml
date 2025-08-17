@@ -1,8 +1,8 @@
-pandoc: 3.1.11
-pkgdown: 2.1.1.9000
-pkgdown_sha: 0cb9d38d1dc25946f01ee7500be9665985d8784e
+pandoc: '3.4'
+pkgdown: 2.1.3
+pkgdown_sha: ~
 articles: {}
-last_built: 2024-10-30T23:29Z
+last_built: 2025-08-17T20:30Z
 urls:
   reference: https://luisdva.github.io/hexsession/reference
   article: https://luisdva.github.io/hexsession/articles
