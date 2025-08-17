@@ -34,25 +34,24 @@ make_tile <- function(
     all_urls <- local_urls
   }
 
-  # Ensure all_urls is the same length as all_logopaths
+  # all_urls the same length as all_logopaths
   if (length(all_urls) < length(all_logopaths)) {
     all_urls <- c(all_urls, rep(NA, length(all_logopaths) - length(all_urls)))
   } else if (length(all_urls) > length(all_logopaths)) {
     all_urls <- all_urls[1:length(all_logopaths)]
   }
 
-  # Coerce `all_logopaths` to a character vector early.
+  # Coerce `all_logopaths` to a character vector
 
   if (is.list(all_logopaths)) {
     # Use unlist to flatten the list into a character vector.
-    # `use.names = FALSE` prevents preserving list names in the vector.
     all_logopaths <- unlist(all_logopaths, use.names = FALSE)
   }
 
-  # Ensure it's treated as character for subsequent operations
+  # as character for subsequent operations
   all_logopaths <- as.character(all_logopaths)
 
-  # Filter out NA, empty strings, and non-existent files.
+  # remove NA, empty, and non-existent files.
   valid_indices <- !is.na(all_logopaths) &
     nzchar(all_logopaths) &
     file.exists(all_logopaths)
@@ -78,7 +77,7 @@ make_tile <- function(
     }
   }
 
-  # Only proceed if there are actual logopaths to process
+  # Only proceed if there are actual logopaths to work with
   if (length(all_logopaths) > 0) {
     temp_file <- file.path(temp_dir, "package_data.rds")
     saveRDS(list(logopaths = all_logopaths, urls = all_urls), temp_file)
