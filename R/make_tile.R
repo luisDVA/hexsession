@@ -15,6 +15,9 @@
 #' @importFrom base64enc base64encode
 #' @importFrom knitr is_html_output
 #' @export
+#' @details
+#' Set the execution options to `output: asis` in Quarto revealjs presentations to enable raw markdown output and adequate rendering of the tiles.
+#'
 make_tile <- function(
   packages = NULL,
   local_images = NULL,

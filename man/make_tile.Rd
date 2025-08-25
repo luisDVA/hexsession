@@ -32,4 +32,6 @@ only these images will be used, excluding loaded packages.
 }
 \details{
 If an installed package does not have a bundled logo, or if the logo has been added to .Rbuildignore, a generic logo with the name of the package will be created instead. When the function cannot locate a package logo unambiously, users will be prompted to select one.
+
+Set the execution options to \code{output: asis} in Quarto revealjs presentations to enable raw markdown output and adequate rendering of the tiles.
 }
