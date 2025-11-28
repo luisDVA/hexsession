@@ -1,15 +1,15 @@
 #' Generate tile of package logos
 #'
 #' @description
-#' Creates and returns an interactive html tile of the packages either listed in the `packages` argument, or all the packages attached to the search path. When rendered interactively, the result is output in the viewer. When  rendered in Quarto or RMarkdown, the tile becomes part of the rendered html. revealjs presentations are currently not supported. If local images are provided,
-#' only these images will be used, excluding loaded packages.
+#' Creates and returns an interactive html tile of the packages either listed in the `packages` argument, or all the packages attached to the search path. When rendered interactively, the result is output in the viewer. When rendered in Quarto or RMarkdown, the tile becomes part of the rendered html. revealjs presentations are now supported. If local images are provided, only these images will be used, excluding loaded packages.
 #'
 #' @param packages Character vector of package names to include (default: NULL, which uses loaded packages)
 #' @param dark_mode Draw the tile on a dark background?
 #' @param local_images Optional character vector of local image paths to add to the tile
 #' @param local_urls Optional character vector of URLs for each of the local images passed
 #' @param color_arrange Logical, whether to arrange the images by color along the 'Lab' color space (defaults to FALSE)
-#' @details If an installed package does not have a bundled logo, or if the logo has been added to .Rbuildignore, a generic logo with the name of the package will be created instead. When the function cannot locate a package logo unambiously, users will be prompted to select one.
+#' @param highlight_mode Logical, dim all images except on hover (defaults to FALSE)
+#' @details If an installed package does not have a bundled logo, or if the logo has been added to .Rbuildignore, a generic logo with the name of the package will be created instead. When the function cannot locate a package logo unambiguously, users will be prompted to select one from a list of potential options.
 #' @return Path to the output file
 #' @importFrom jsonlite toJSON
 #' @importFrom base64enc base64encode
@@ -23,7 +23,8 @@ make_tile <- function(
   local_images = NULL,
   local_urls = NULL,
   dark_mode = FALSE,
-  color_arrange = FALSE
+  color_arrange = FALSE,
+  highlight_mode = FALSE
 ) {
   temp_dir <- file.path(getwd(), "temp_hexsession")
   dir.create(temp_dir, showWarnings = FALSE)
@@ -86,7 +87,13 @@ make_tile <- function(
     saveRDS(list(logopaths = all_logopaths, urls = all_urls), temp_file)
 
     js_file <- file.path(temp_dir, "hexsession.js")
-    generate_hexsession_js(all_logopaths, all_urls, dark_mode, js_file)
+    generate_hexsession_js(
+      all_logopaths,
+      all_urls,
+      dark_mode,
+      js_file,
+      highlight_mode
+    )
 
     template_path <- system.file(
       "templates",
@@ -100,9 +107,10 @@ make_tile <- function(
     )
 
     quarto_call <- sprintf(
-      'quarto render "%s" -P dark_mode:%s',
+      'quarto render "%s" -P dark_mode:%s -P highlight_mode:%s',
       file.path(temp_dir, "_hexout.qmd"),
-      tolower(as.character(dark_mode))
+      tolower(as.character(dark_mode)),
+      tolower(as.character(highlight_mode))
     )
     system(quarto_call)
 

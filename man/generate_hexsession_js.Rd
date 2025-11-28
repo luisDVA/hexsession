@@ -4,7 +4,13 @@
 \alias{generate_hexsession_js}
 \title{Generate JavaScript file for hexsession}
 \usage{
-generate_hexsession_js(logopaths, urls, dark_mode, output_js)
+generate_hexsession_js(
+  logopaths,
+  urls,
+  dark_mode,
+  output_js,
+  highlight_mode = FALSE
+)
 }
 \arguments{
 \item{logopaths}{Vector of image paths}
@@ -14,6 +20,8 @@ generate_hexsession_js(logopaths, urls, dark_mode, output_js)
 \item{dark_mode}{Use dark mode, inherited from make_tile}
 
 \item{output_js}{Path to save the JavaScript file}
+
+\item{highlight_mode}{Use highlight mode, inherited from make_tile}
 }
 \description{
 Generate JavaScript file for hexsession

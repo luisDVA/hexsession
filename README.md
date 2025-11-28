@@ -86,6 +86,16 @@ The result:
 
 ![](man/figures/exampletile.png)
 
+### Highlight mode
+
+Set `highlight_mode` to `TRUE` if you want a tile in which all images
+are dimmed except the one being hovered over, to emphazise individual
+packages interactively:
+
+``` r
+hexsession::make_tile(highlight_mode = TRUE)
+```
+
 ### Dark mode
 
 To draw the tiles on a dark background, set `dark_mode` to `TRUE` when
@@ -127,6 +137,8 @@ All feedback is welcome in any form (issues, pull requests, etc.)
   tutorial](https://css-tricks.com/hexagons-and-beyond-flexible-responsive-grid-patterns-sans-media-queries/)
   by Temani Afif.
 
-- the javascript code to populate the divs in the Quarto template was
+- The javascript code to populate the divs in the Quarto template was
   written with input from the Claude 3.5 Sonnet LLM running in the
-  Continue extension in the Positron IDE.
+  Continue extension in the Positron IDE. Further refinements to the
+  code were added using Claude Sonnet 4 running in the Positron
+  Assistant extension. All outputs double-checked and edited by LDVA.

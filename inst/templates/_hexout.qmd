@@ -5,6 +5,7 @@ params:
   temp_file_path: "package_data.rds"
   js_file_path: "hexsession.js"
   dark_mode: false
+  highlight_mode: false
 resources:
   - images
 embed-resources: true
@@ -12,8 +13,6 @@ embed-resources: true
 
 ```{r}
 #| echo: false
-
-
 
 library(htmltools)
 
@@ -91,15 +90,29 @@ body {
   height: 100%;
 }
 
-/* Subtle hover effect */
-.container div:hover {
+/* Regular hover effect */
+.container:not(.highlight-mode) div:hover {
   z-index: 1;
-  transform: scale(1.05);  /* Reduced scale */
-  box-shadow: 0 4px 8px rgba(0,0,0,0.1);  /* Subtle shadow */
+  transform: scale(1.05);
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
 }
 
-.container div:hover img {
-  filter: brightness(1.1);  /* Slightly brighten the image */
+.container:not(.highlight-mode) div:hover img {
+  filter: brightness(1.1);
+}
+
+/* Highlight mode styles */
+.container.highlight-mode div {
+  opacity: 0.3;
+  filter: grayscale(0.7) brightness(0.6);
+}
+
+.container.highlight-mode div:hover {
+  opacity: 1;
+  filter: grayscale(0) brightness(1);
+  z-index: 1;
+  transform: scale(1.08);
+  box-shadow: 0 6px 12px rgba(0,0,0,0.2);
 }
 
 .attribution {
@@ -140,4 +153,3 @@ body {
 
 </style>
 ```
-

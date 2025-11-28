@@ -4,12 +4,13 @@
 #' @param urls Vector of URLs
 #' @param dark_mode Use dark mode, inherited from make_tile
 #' @param output_js Path to save the JavaScript file
+#' @param highlight_mode Use highlight mode, inherited from make_tile
 #'
 #' @importFrom jsonlite toJSON
 #' @importFrom base64enc base64encode
 #'
 #' @export
-generate_hexsession_js <- function(logopaths, urls, dark_mode, output_js) {
+generate_hexsession_js <- function(logopaths, urls, dark_mode, output_js, highlight_mode = FALSE) {
   encoded_paths <- vector("character", length(logopaths))
   for (i in seq_along(logopaths)) {
     tryCatch({
@@ -34,6 +35,7 @@ generate_hexsession_js <- function(logopaths, urls, dark_mode, output_js) {
   js_content <- sprintf('
 const imageUrlPairs = %s;
 const darkMode = %s;
+const highlightMode = %s;
 
 document.addEventListener("DOMContentLoaded", function() {
   const container = document.getElementById("imageContainer");
@@ -50,6 +52,10 @@ document.addEventListener("DOMContentLoaded", function() {
     document.documentElement.style.setProperty("--tile-bg", "#f0f0f0");
     document.documentElement.style.setProperty("--attribution-bg", "rgba(0, 0, 0, 0.1)");
     document.documentElement.style.setProperty("--link-color", "#0066cc");
+  }
+
+  if (highlightMode) {
+    container.classList.add("highlight-mode");
   }
 
   imageUrlPairs.forEach((pair, index) => {
@@ -74,7 +80,8 @@ document.addEventListener("DOMContentLoaded", function() {
 });
 ',
     jsonlite::toJSON(image_url_pairs, auto_unbox = TRUE),
-    tolower(as.character(dark_mode))
+    tolower(as.character(dark_mode)),
+    tolower(as.character(highlight_mode))
   )
 
   writeLines(js_content, output_js)
