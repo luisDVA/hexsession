@@ -17,7 +17,8 @@ make_tile(
   local_urls = NULL,
   dark_mode = FALSE,
   color_arrange = FALSE,
-  highlight_mode = FALSE
+  highlight_mode = FALSE,
+  focus = NULL
 )
 ```
 
@@ -25,8 +26,8 @@ make_tile(
 
 - packages:
 
-  Character vector of package names to include (default: NULL, which
-  uses loaded packages)
+  A character vector of package names to include (defaults to NULL,
+  which uses loaded packages)
 
 - local_images:
 
@@ -48,6 +49,11 @@ make_tile(
 - highlight_mode:
 
   Logical, dim all images except on hover (defaults to FALSE)
+
+- focus:
+
+  A character vector of package names to highlight, dimming all others
+  (defaults to NULL)
 
 ## Value
 

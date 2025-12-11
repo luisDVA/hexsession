@@ -10,7 +10,9 @@ generate_hexsession_js(
   urls,
   dark_mode,
   output_js,
-  highlight_mode = FALSE
+  highlight_mode = FALSE,
+  pkg_names = NULL,
+  focus = NULL
 )
 ```
 
@@ -35,3 +37,11 @@ generate_hexsession_js(
 - highlight_mode:
 
   Use highlight mode, inherited from make_tile
+
+- pkg_names:
+
+  Vector of package names (optional)
+
+- focus:
+
+  Vector of package names to focus on (optional)

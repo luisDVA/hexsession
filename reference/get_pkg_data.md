@@ -17,4 +17,4 @@ get_pkg_data(packages = NULL)
 
 ## Value
 
-A list containing logopaths and urls for the packages
+A list containing logopaths, urls, and package names

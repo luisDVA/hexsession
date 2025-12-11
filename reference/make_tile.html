@@ -43,7 +43,8 @@
 <span>  local_urls <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  dark_mode <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  color_arrange <span class="op">=</span> <span class="cn">FALSE</span>,</span>
-<span>  highlight_mode <span class="op">=</span> <span class="cn">FALSE</span></span>
+<span>  highlight_mode <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  focus <span class="op">=</span> <span class="cn">NULL</span></span>
 <span><span class="op">)</span></span></code></pre></div>
     </div>
 
@@ -52,7 +53,7 @@
 
 
 <dl><dt id="arg-packages">packages<a class="anchor" aria-label="anchor" href="#arg-packages"></a></dt>
-<dd><p>Character vector of package names to include (default: NULL, which uses loaded packages)</p></dd>
+<dd><p>A character vector of package names to include (defaults to NULL, which uses loaded packages)</p></dd>
 
 
 <dt id="arg-local-images">local_images<a class="anchor" aria-label="anchor" href="#arg-local-images"></a></dt>
@@ -73,6 +74,10 @@
 
 <dt id="arg-highlight-mode">highlight_mode<a class="anchor" aria-label="anchor" href="#arg-highlight-mode"></a></dt>
 <dd><p>Logical, dim all images except on hover (defaults to FALSE)</p></dd>
+
+
+<dt id="arg-focus">focus<a class="anchor" aria-label="anchor" href="#arg-focus"></a></dt>
+<dd><p>A character vector of package names to highlight, dimming all others (defaults to NULL)</p></dd>
 
 </dl></div>
     <div class="section level2">
