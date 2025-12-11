@@ -9,7 +9,9 @@ generate_hexsession_js(
   urls,
   dark_mode,
   output_js,
-  highlight_mode = FALSE
+  highlight_mode = FALSE,
+  pkg_names = NULL,
+  focus = NULL
 )
 }
 \arguments{
@@ -22,6 +24,10 @@ generate_hexsession_js(
 \item{output_js}{Path to save the JavaScript file}
 
 \item{highlight_mode}{Use highlight mode, inherited from make_tile}
+
+\item{pkg_names}{Vector of package names (optional)}
+
+\item{focus}{Vector of package names to focus on (optional)}
 }
 \description{
 Generate JavaScript file for hexsession

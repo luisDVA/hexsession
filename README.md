@@ -96,6 +96,12 @@ packages interactively:
 hexsession::make_tile(highlight_mode = TRUE)
 ```
 
+### Focus
+
+When making tiles for a vector of package names, use `focus` to specify
+packages one or more packages that will be highlighted by dimming all
+the other images in the tile.
+
 ### Dark mode
 
 To draw the tiles on a dark background, set `dark_mode` to `TRUE` when

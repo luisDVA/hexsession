@@ -91,13 +91,13 @@ body {
 }
 
 /* Regular hover effect */
-.container:not(.highlight-mode) div:hover {
+.container:not(.highlight-mode):not(.focus-mode) div:hover {
   z-index: 1;
   transform: scale(1.05);
   box-shadow: 0 4px 8px rgba(0,0,0,0.1);
 }
 
-.container:not(.highlight-mode) div:hover img {
+.container:not(.highlight-mode):not(.focus-mode) div:hover img {
   filter: brightness(1.1);
 }
 
@@ -111,6 +111,28 @@ body {
   opacity: 1;
   filter: grayscale(0) brightness(1);
   z-index: 1;
+  transform: scale(1.08);
+  box-shadow: 0 6px 12px rgba(0,0,0,0.2);
+}
+
+/* Focus mode styles */
+.container.focus-mode div {
+  opacity: 0.3;
+  filter: grayscale(0.7) brightness(0.6);
+  transition: all 0.3s ease;
+}
+
+.container.focus-mode div.focused {
+  opacity: 1;
+  filter: grayscale(0) brightness(1);
+  z-index: 1;
+  transform: scale(1.05);
+}
+
+.container.focus-mode div:hover {
+  opacity: 1;
+  filter: grayscale(0) brightness(1);
+  z-index: 2;
   transform: scale(1.08);
   box-shadow: 0 6px 12px rgba(0,0,0,0.2);
 }

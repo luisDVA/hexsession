@@ -10,11 +10,12 @@ make_tile(
   local_urls = NULL,
   dark_mode = FALSE,
   color_arrange = FALSE,
-  highlight_mode = FALSE
+  highlight_mode = FALSE,
+  focus = NULL
 )
 }
 \arguments{
-\item{packages}{Character vector of package names to include (default: NULL, which uses loaded packages)}
+\item{packages}{A character vector of package names to include (defaults to NULL, which uses loaded packages)}
 
 \item{local_images}{Optional character vector of local image paths to add to the tile}
 
@@ -25,6 +26,8 @@ make_tile(
 \item{color_arrange}{Logical, whether to arrange the images by color along the 'Lab' color space (defaults to FALSE)}
 
 \item{highlight_mode}{Logical, dim all images except on hover (defaults to FALSE)}
+
+\item{focus}{A character vector of package names to highlight, dimming all others (defaults to NULL)}
 }
 \value{
 Path to the output file

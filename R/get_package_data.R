@@ -1,6 +1,6 @@
 #' Get package data
 #' @param packages Character vector of package names (default is NULL, uses loaded packages)
-#' @return A list containing logopaths and urls for the packages
+#' @return A list containing logopaths, urls, and package names
 get_pkg_data <- function(packages = NULL) {
   if (is.null(packages)) {
     packages <- getLoaded()
@@ -36,5 +36,5 @@ get_pkg_data <- function(packages = NULL) {
     }
   })
 
-  list(logopaths = logopaths, urls = urls)
+  list(logopaths = logopaths, urls = urls, packages = packages)
 }

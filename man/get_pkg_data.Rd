@@ -10,7 +10,7 @@ get_pkg_data(packages = NULL)
 \item{packages}{Character vector of package names (default is NULL, uses loaded packages)}
 }
 \value{
-A list containing logopaths and urls for the packages
+A list containing logopaths, urls, and package names
 }
 \description{
 Get package data
