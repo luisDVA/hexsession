@@ -4,7 +4,15 @@
 #' @param screen_width Width of the browser window
 #' @param screen_height Height of the browser window
 #' @param dark_mode Is the tile being saved dark or light mode?
-#' @return Path to the saved image
+#' @return Path to the saved PNG image (the value of `output_path`).
+#'
+#' @examples
+#' \dontrun{
+#' # First create a tile with make_tile(), then capture it
+#' make_tile(packages = c("ggplot2", "dplyr"))
+#' snap_tile("my_tile.png", screen_width = 1000, screen_height = 800)
+#' }
+#'
 #' @export
 snap_tile <- function(
   output_path,

@@ -21,8 +21,16 @@ snap_tile(
 \item{dark_mode}{Is the tile being saved dark or light mode?}
 }
 \value{
-Path to the saved image
+Path to the saved PNG image (the value of \code{output_path}).
 }
 \description{
 Take screenshot of html image tile
+}
+\examples{
+\dontrun{
+# First create a tile with make_tile(), then capture it
+make_tile(packages = c("ggplot2", "dplyr"))
+snap_tile("my_tile.png", screen_width = 1000, screen_height = 800)
+}
+
 }

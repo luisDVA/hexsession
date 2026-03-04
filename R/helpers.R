@@ -135,7 +135,14 @@ pkgurls <- function(pkgnames) {
 
 #' Encode image to Base64
 #' @param file_path Path to an image file
-#' @return Base64 encoded string of the image
+#' @return A character string containing a base64-encoded data URI
+#'   (e.g., `"data:image/png;base64,..."`), or `NULL` with a warning if
+#'   encoding fails.
+#'
+#' @examples
+#' img <- system.file("extdata/rectLight.png", package = "hexsession")
+#' encode_image(img)
+#'
 #' @export
 encode_image <- function(file_path) {
   tryCatch(

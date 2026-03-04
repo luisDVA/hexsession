@@ -8,6 +8,22 @@
 #' @param pkg_names Vector of package names (optional)
 #' @param focus Vector of package names to focus on (optional)
 #'
+#' @return Called for its side effect; invisibly returns `NULL`. Writes a
+#'   JavaScript file to `output_js` containing base64-encoded image data and
+#'   dark/light mode CSS variable assignments.
+#'
+#' @examples
+#' \dontrun{
+#' img <- system.file("extdata/rectLight.png", package = "hexsession")
+#' out <- tempfile(fileext = ".js")
+#' generate_hexsession_js(
+#'   logopaths = img,
+#'   urls = "https://example.com",
+#'   dark_mode = FALSE,
+#'   output_js = out
+#' )
+#' }
+#'
 #' @importFrom jsonlite toJSON
 #' @importFrom base64enc base64encode
 #'

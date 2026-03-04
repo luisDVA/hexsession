@@ -1,6 +1,7 @@
 #' Get package data
 #' @param packages Character vector of package names (default is NULL, uses loaded packages)
 #' @return A list containing logopaths, urls, and package names
+#' @importFrom utils installed.packages
 get_pkg_data <- function(packages = NULL) {
   if (is.null(packages)) {
     packages <- getLoaded()

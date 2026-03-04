@@ -11,7 +11,18 @@
 #' @param highlight_mode Logical, dim all images except on hover (defaults to FALSE)
 #' @param focus A character vector of package names to highlight, dimming all others (defaults to NULL)
 #' @details If an installed package does not have a bundled logo, or if the logo has been added to .Rbuildignore, a generic logo with the name of the package will be created instead. When the function cannot locate a package logo unambiguously, users will be prompted to select one from a list of potential options.
-#' @return Path to the output file
+#' @return Path to the output HTML file when called interactively, or an
+#'   `htmltools` HTML object when rendered inside Quarto or R Markdown.
+#'
+#' @examples
+#' \dontrun{
+#' # Tile for a specific set of packages
+#' make_tile(packages = c("ggplot2", "dplyr", "tidyr"))
+#'
+#' # Tile for all loaded packages on a dark background
+#' make_tile(dark_mode = TRUE)
+#' }
+#'
 #' @importFrom jsonlite toJSON
 #' @importFrom base64enc base64encode
 #' @importFrom knitr is_html_output

@@ -1,7 +1,7 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-# hexsession <img src="man/figures/logo.png" align="right" height="138" alt="" />
+# hexsession <img src="https://raw.githubusercontent.com/luisDVA/hexsession/main/man/figures/logo.png" align="right" height="138" alt="" />
 
 <!-- badges: start -->
 
@@ -19,10 +19,16 @@ base packages). Also supports vectors with paths to local images.
 
 ## Installation
 
-You can install the development version of hexsession like so:
+You can install the released version of hexsession from CRAN:
 
 ``` r
-# install.packages("remotes)
+install.packages("hexsession")
+```
+
+Or install the development version from GitHub:
+
+``` r
+# install.packages("remotes")
 remotes::install_github("luisdva/hexsession")
 ```
 
@@ -70,7 +76,8 @@ library(patchwork)
 hexsession::make_tile()
 ```
 
-The output would look like this: ![](man/figures/hsdemo.gif)
+The output would look like this:
+![](https://raw.githubusercontent.com/luisDVA/hexsession/main/man/figures/hsdemo.gif)
 
 Once downloaded to your machine and opened in a browser, the
 [hexout_example.html](inst/extdata/hexout_example.html) shows the
@@ -84,7 +91,7 @@ change the viewport size.
 
 The result:
 
-![](man/figures/exampletile.png)
+![](https://raw.githubusercontent.com/luisDVA/hexsession/main/man/figures/exampletile.png)
 
 ### Highlight mode
 

@@ -30,7 +30,8 @@ make_tile(
 \item{focus}{A character vector of package names to highlight, dimming all others (defaults to NULL)}
 }
 \value{
-Path to the output file
+Path to the output HTML file when called interactively, or an
+\code{htmltools} HTML object when rendered inside Quarto or R Markdown.
 }
 \description{
 Creates and returns an interactive html tile of the packages either listed in the \code{packages} argument, or all the packages attached to the search path. When rendered interactively, the result is output in the viewer. When rendered in Quarto or RMarkdown, the tile becomes part of the rendered html. revealjs presentations are now supported. If local images are provided, only these images will be used, excluding loaded packages.
@@ -39,4 +40,14 @@ Creates and returns an interactive html tile of the packages either listed in th
 If an installed package does not have a bundled logo, or if the logo has been added to .Rbuildignore, a generic logo with the name of the package will be created instead. When the function cannot locate a package logo unambiguously, users will be prompted to select one from a list of potential options.
 
 Set the execution options to \code{output: asis} in Quarto revealjs presentations to enable raw markdown output and adequate rendering of the tiles.
+}
+\examples{
+\dontrun{
+# Tile for a specific set of packages
+make_tile(packages = c("ggplot2", "dplyr", "tidyr"))
+
+# Tile for all loaded packages on a dark background
+make_tile(dark_mode = TRUE)
+}
+
 }

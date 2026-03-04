@@ -10,8 +10,15 @@ encode_image(file_path)
 \item{file_path}{Path to an image file}
 }
 \value{
-Base64 encoded string of the image
+A character string containing a base64-encoded data URI
+(e.g., \code{"data:image/png;base64,..."}), or \code{NULL} with a warning if
+encoding fails.
 }
 \description{
 Encode image to Base64
+}
+\examples{
+img <- system.file("extdata/rectLight.png", package = "hexsession")
+encode_image(img)
+
 }

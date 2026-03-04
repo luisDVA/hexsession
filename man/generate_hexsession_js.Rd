@@ -29,6 +29,24 @@ generate_hexsession_js(
 
 \item{focus}{Vector of package names to focus on (optional)}
 }
+\value{
+Called for its side effect; invisibly returns \code{NULL}. Writes a
+JavaScript file to \code{output_js} containing base64-encoded image data and
+dark/light mode CSS variable assignments.
+}
 \description{
 Generate JavaScript file for hexsession
+}
+\examples{
+\dontrun{
+img <- system.file("extdata/rectLight.png", package = "hexsession")
+out <- tempfile(fileext = ".js")
+generate_hexsession_js(
+  logopaths = img,
+  urls = "https://example.com",
+  dark_mode = FALSE,
+  output_js = out
+)
+}
+
 }
