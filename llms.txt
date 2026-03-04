@@ -8,10 +8,16 @@ base packages). Also supports vectors with paths to local images.
 
 ## Installation
 
-You can install the development version of hexsession like so:
+You can install the released version of hexsession from CRAN:
 
 ``` r
-# install.packages("remotes)
+install.packages("hexsession")
+```
+
+Or install the development version from GitHub:
+
+``` r
+# install.packages("remotes")
 remotes::install_github("luisdva/hexsession")
 ```
 
@@ -61,7 +67,8 @@ library(patchwork)
 hexsession::make_tile()
 ```
 
-The output would look like this: ![](reference/figures/hsdemo.gif)
+The output would look like this:
+![](https://raw.githubusercontent.com/luisDVA/hexsession/main/man/figures/hsdemo.gif)
 
 Once downloaded to your machine and opened in a browser, the
 [hexout_example.html](https://luisdva.github.io/hexsession/inst/extdata/hexout_example.md)
@@ -76,7 +83,7 @@ to change the viewport size.
 
 The result:
 
-![](reference/figures/exampletile.png)
+![](https://raw.githubusercontent.com/luisDVA/hexsession/main/man/figures/exampletile.png)
 
 ### Highlight mode
 

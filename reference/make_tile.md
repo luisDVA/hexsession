@@ -57,7 +57,8 @@ make_tile(
 
 ## Value
 
-Path to the output file
+Path to the output HTML file when called interactively, or an
+`htmltools` HTML object when rendered inside Quarto or R Markdown.
 
 ## Details
 
@@ -70,3 +71,15 @@ potential options.
 Set the execution options to `output: asis` in Quarto revealjs
 presentations to enable raw markdown output and adequate rendering of
 the tiles.
+
+## Examples
+
+``` r
+if (FALSE) { # \dontrun{
+# Tile for a specific set of packages
+make_tile(packages = c("ggplot2", "dplyr", "tidyr"))
+
+# Tile for all loaded packages on a dark background
+make_tile(dark_mode = TRUE)
+} # }
+```

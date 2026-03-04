@@ -5,7 +5,7 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<title>Create a tile of logos for loaded packages • hexsession</title>
+<title>Create a Tile of Logos for Loaded Packages • hexsession</title>
 <!-- favicons --><link rel="icon" type="image/png" sizes="96x96" href="favicon-96x96.png">
 <link rel="icon" type="”image/svg+xml”" href="favicon.svg">
 <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
@@ -15,9 +15,9 @@
 <link href="deps/bootstrap-5.3.1/bootstrap.min.css" rel="stylesheet">
 <script src="deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><link href="deps/font-awesome-6.5.2/css/all.min.css" rel="stylesheet">
 <link href="deps/font-awesome-6.5.2/css/v4-shims.min.css" rel="stylesheet">
-<script src="deps/headroom-0.11.0/headroom.min.js"></script><script src="deps/headroom-0.11.0/jQuery.headroom.min.js"></script><script src="deps/bootstrap-toc-1.0.1/bootstrap-toc.min.js"></script><script src="deps/clipboard.js-2.0.11/clipboard.min.js"></script><script src="deps/search-1.0.0/autocomplete.jquery.min.js"></script><script src="deps/search-1.0.0/fuse.min.js"></script><script src="deps/search-1.0.0/mark.min.js"></script><!-- pkgdown --><script src="pkgdown.js"></script><meta property="og:title" content="Create a tile of logos for loaded packages">
-<meta name="description" content="Creates a responsive HTML file with tiled hex logos for all loaded packages in a session, which can be saved as a static screenshot in png format.">
-<meta property="og:description" content="Creates a responsive HTML file with tiled hex logos for all loaded packages in a session, which can be saved as a static screenshot in png format.">
+<script src="deps/headroom-0.11.0/headroom.min.js"></script><script src="deps/headroom-0.11.0/jQuery.headroom.min.js"></script><script src="deps/bootstrap-toc-1.0.1/bootstrap-toc.min.js"></script><script src="deps/clipboard.js-2.0.11/clipboard.min.js"></script><script src="deps/search-1.0.0/autocomplete.jquery.min.js"></script><script src="deps/search-1.0.0/fuse.min.js"></script><script src="deps/search-1.0.0/mark.min.js"></script><!-- pkgdown --><script src="pkgdown.js"></script><meta property="og:title" content="Create a Tile of Logos for Loaded Packages">
+<meta name="description" content="Creates a responsive HTML file with tiled hexagonal logos for packages in an R session. Tiles can be also be generated for a custom set of packages specified with a character vector. Output can be saved as a static screenshot in PNG format using a headless browser.">
+<meta property="og:description" content="Creates a responsive HTML file with tiled hexagonal logos for packages in an R session. Tiles can be also be generated for a custom set of packages specified with a character vector. Output can be saved as a static screenshot in PNG format using a headless browser.">
 <meta property="og:image" content="https://luisdva.github.io/hexsession/logo.png">
 </head>
 <body>
@@ -28,7 +28,7 @@
 
     <a class="navbar-brand me-2" href="index.html">hexsession</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.0.9000</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.1.0</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -38,6 +38,7 @@
     <div id="navbar" class="collapse navbar-collapse ms-3">
       <ul class="navbar-nav me-auto">
 <li class="nav-item"><a class="nav-link" href="reference/index.html">Reference</a></li>
+<li class="nav-item"><a class="nav-link" href="news/index.html">Changelog</a></li>
       </ul>
 <ul class="navbar-nav">
 <li class="nav-item"><form class="form-inline" role="search">
@@ -62,9 +63,12 @@
 <div class="section level2">
 <h2 id="installation">Installation<a class="anchor" aria-label="anchor" href="#installation"></a>
 </h2>
-<p>You can install the development version of hexsession like so:</p>
+<p>You can install the released version of hexsession from CRAN:</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co"># install.packages("remotes)</span></span>
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"hexsession"</span><span class="op">)</span></span></code></pre></div>
+<p>Or install the development version from GitHub:</p>
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># install.packages("remotes")</span></span>
 <span><span class="fu">remotes</span><span class="fu">::</span><span class="fu">install_github</span><span class="op">(</span><span class="st">"luisdva/hexsession"</span><span class="op">)</span></span></code></pre></div>
 </div>
 <div class="section level2">
@@ -76,13 +80,13 @@
 <li>If the images bundled with a package do not match ‘hex’ or ‘logo’, or there are multiple possible options, users are prompted to specify which file to use.</li>
 </ul>
 <p>For a given session with libraries loaded in addition to base packages:</p>
-<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span></span>
 <span><span class="co"># custom set of packages</span></span>
 <span><span class="fu">hexsession</span><span class="fu">::</span><span class="fu"><a href="reference/make_tile.html">make_tile</a></span><span class="op">(</span>packages<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"terra"</span>,<span class="st">"sf"</span>,<span class="st">"tidyr"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <p>The <code><a href="reference/make_tile.html">make_tile()</a></code> function will render the HTML output in a new folder in the working directory using a Quarto template file that will also be copied to this new directory.</p>
 <p>For a session with the following packages loaded:</p>
-<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/luisDVA/annotater" class="external-link">annotater</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://ggforce.data-imaginist.com" class="external-link">ggforce</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://purrr.tidyverse.org/" class="external-link">purrr</a></span><span class="op">)</span></span>
@@ -97,16 +101,16 @@
 <span></span>
 <span></span>
 <span><span class="fu">hexsession</span><span class="fu">::</span><span class="fu"><a href="reference/make_tile.html">make_tile</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
-<p>The output would look like this: <img src="reference/figures/hsdemo.gif"></p>
+<p>The output would look like this: <img src="https://raw.githubusercontent.com/luisDVA/hexsession/main/man/figures/hsdemo.gif"></p>
 <p>Once downloaded to your machine and opened in a browser, the <a href="inst/extdata/hexout_example.html">hexout_example.html</a> shows the interactive, responsive HTML version with cool hover effects that adapts to the size of the browser window and includes hyperlinks to each package website.</p>
 <p>To save a static version of the hex tile, we call <code><a href="reference/snap_tile.html">snap_tile()</a></code> with a path to the output image and optionally, height and width values to change the viewport size.</p>
 <p>The result:</p>
-<p><img src="reference/figures/exampletile.png"></p>
+<p><img src="https://raw.githubusercontent.com/luisDVA/hexsession/main/man/figures/exampletile.png"></p>
 <div class="section level3">
 <h3 id="highlight-mode">Highlight mode<a class="anchor" aria-label="anchor" href="#highlight-mode"></a>
 </h3>
 <p>Set <code>highlight_mode</code> to <code>TRUE</code> if you want a tile in which all images are dimmed except the one being hovered over, to emphazise individual packages interactively:</p>
-<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">hexsession</span><span class="fu">::</span><span class="fu"><a href="reference/make_tile.html">make_tile</a></span><span class="op">(</span>highlight_mode <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
 </div>
 <div class="section level3">
@@ -118,7 +122,7 @@
 <h3 id="dark-mode">Dark mode<a class="anchor" aria-label="anchor" href="#dark-mode"></a>
 </h3>
 <p>To draw the tiles on a dark background, set <code>dark_mode</code> to <code>TRUE</code> when creating or capturing your hex logos.</p>
-<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">hexsession</span><span class="fu">::</span><span class="fu"><a href="reference/make_tile.html">make_tile</a></span><span class="op">(</span>dark_mode <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
 <span><span class="fu">hexsession</span><span class="fu">::</span><span class="fu"><a href="reference/snap_tile.html">snap_tile</a></span><span class="op">(</span><span class="st">"test.png"</span>,dark_mode <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
 </div>
@@ -127,11 +131,11 @@
 <h2 id="user-provided-images-and-urls">User-provided images and urls<a class="anchor" aria-label="anchor" href="#user-provided-images-and-urls"></a>
 </h2>
 <p><code>make_tile</code> can now take vectors of additional images and their respective but optional urls to include in the hex grid.</p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" tabindex="-1"></a><span class="fu">make_tile</span>(<span class="at">packages =</span> <span class="fu">c</span>(<span class="st">"tidyterra"</span>, <span class="st">"sf"</span>), </span>
-<span id="cb6-2"><a href="#cb6-2" tabindex="-1"></a>          <span class="at">local_images =</span> <span class="fu">c</span>(<span class="st">"path/to/your/image1.png"</span>, </span>
-<span id="cb6-3"><a href="#cb6-3" tabindex="-1"></a>                           <span class="st">"path/to/your/image2.png"</span>,</span>
-<span id="cb6-4"><a href="#cb6-4" tabindex="-1"></a>          <span class="at">local_urls =</span> <span class="fu">c</span>(<span class="st">"https://an-example.web"</span>,  <span class="st">"https://another-example.com"</span>))</span>
-<span id="cb6-5"><a href="#cb6-5" tabindex="-1"></a>          </span></code></pre></div>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" tabindex="-1"></a><span class="fu">make_tile</span>(<span class="at">packages =</span> <span class="fu">c</span>(<span class="st">"tidyterra"</span>, <span class="st">"sf"</span>), </span>
+<span id="cb7-2"><a href="#cb7-2" tabindex="-1"></a>          <span class="at">local_images =</span> <span class="fu">c</span>(<span class="st">"path/to/your/image1.png"</span>, </span>
+<span id="cb7-3"><a href="#cb7-3" tabindex="-1"></a>                           <span class="st">"path/to/your/image2.png"</span>,</span>
+<span id="cb7-4"><a href="#cb7-4" tabindex="-1"></a>          <span class="at">local_urls =</span> <span class="fu">c</span>(<span class="st">"https://an-example.web"</span>,  <span class="st">"https://another-example.com"</span>))</span>
+<span id="cb7-5"><a href="#cb7-5" tabindex="-1"></a>          </span></code></pre></div>
 </div>
 <div class="section level2">
 <h2 id="notes">Notes<a class="anchor" aria-label="anchor" href="#notes"></a>
@@ -176,7 +180,7 @@
 <div class="developers">
 <h2 data-toc-skip>Developers</h2>
 <ul class="list-unstyled">
-<li>Luis D. Verde Arregoitia <br><small class="roles"> Author, maintainer </small> <a href="https://orcid.org/0000-0001-9520-6543" target="orcid.widget" aria-label="ORCID" class="external-link"><span class="fab fa-orcid orcid" aria-hidden="true"></span></a>  </li>
+<li>Luis D. Verde Arregoitia <br><small class="roles"> Author, maintainer, copyright holder </small> <a href="https://orcid.org/0000-0001-9520-6543" target="orcid.widget" aria-label="ORCID" class="external-link"><span class="fab fa-orcid orcid" aria-hidden="true"></span></a>  </li>
 </ul>
 </div>
 
