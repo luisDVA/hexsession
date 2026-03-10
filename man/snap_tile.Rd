@@ -27,10 +27,7 @@ Path to the saved PNG image (the value of \code{output_path}).
 Take screenshot of html image tile
 }
 \examples{
-\dontrun{
-# First create a tile with make_tile(), then capture it
-make_tile(packages = c("ggplot2", "dplyr"))
-snap_tile("my_tile.png", screen_width = 1000, screen_height = 800)
-}
-
+\dontshow{if (file.exists("temp_hexsession/_hexout.html") && nzchar(tryCatch(chromote::find_chrome(), error = function(e) ""))) withAutoprint(\{ # examplesIf}
+snap_tile(tempfile(fileext = ".png"))
+\dontshow{\}) # examplesIf}
 }

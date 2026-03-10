@@ -42,12 +42,10 @@ If an installed package does not have a bundled logo, or if the logo has been ad
 Set the execution options to \code{output: asis} in Quarto revealjs presentations to enable raw markdown output and adequate rendering of the tiles.
 }
 \examples{
-\dontrun{
-# Tile for a specific set of packages
-make_tile(packages = c("ggplot2", "dplyr", "tidyr"))
-
-# Tile for all loaded packages on a dark background
-make_tile(dark_mode = TRUE)
-}
-
+\dontshow{if (nzchar(Sys.which("quarto")) && requireNamespace("rmarkdown", quietly = TRUE)) withAutoprint(\{ # examplesIf}
+img1 <- system.file("extdata/rectLight.png", package = "hexsession")
+img2 <- system.file("extdata/rectMed.png", package = "hexsession")
+img3 <- system.file("extdata/rectDark.png", package = "hexsession")
+withr::with_tempdir(make_tile(local_images = c(img1, img2, img3)))
+\dontshow{\}) # examplesIf}
 }

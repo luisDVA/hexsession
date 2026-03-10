@@ -6,12 +6,8 @@
 #' @param dark_mode Is the tile being saved dark or light mode?
 #' @return Path to the saved PNG image (the value of `output_path`).
 #'
-#' @examples
-#' \dontrun{
-#' # First create a tile with make_tile(), then capture it
-#' make_tile(packages = c("ggplot2", "dplyr"))
-#' snap_tile("my_tile.png", screen_width = 1000, screen_height = 800)
-#' }
+#' @examplesIf file.exists("temp_hexsession/_hexout.html") && nzchar(tryCatch(chromote::find_chrome(), error = function(e) ""))
+#' snap_tile(tempfile(fileext = ".png"))
 #'
 #' @export
 snap_tile <- function(
@@ -26,7 +22,7 @@ snap_tile <- function(
     "white"
   }
 
-  html_path <- "temp_hexsession/hexout.html"
+  html_path <- "temp_hexsession/_hexout.html"
 
   # Check for hex tile HTML file
   if (!file.exists(html_path)) {
@@ -44,11 +40,9 @@ snap_tile <- function(
     )
   }
 
-  # Browser session
-  b <- chromote::ChromoteSession$new(
-    height = screen_height,
-    width = screen_width
-  )
+  # Browser session - create explicit Chromote instance for clean shutdown
+  chr <- chromote::Chromote$new()
+  b <- chr$new_session(height = screen_height, width = screen_width)
 
   # Open the hex tile
   b$Page$navigate(paste0("file://", normalizePath(html_path)))
@@ -60,7 +54,7 @@ snap_tile <- function(
       screenshot(b, selector = "#quarto-content")
     },
     error = function(e) {
-      cat("Error taking screenshot:", conditionMessage(e), "\n")
+      warning("Error taking screenshot: ", conditionMessage(e))
     }
   )
 
@@ -73,12 +67,25 @@ snap_tile <- function(
         magick::image_shadow() |>
         magick::image_write(output_path, format = "png", density = 300)
 
-      cat("Image processed and saved to:", output_path, "\n")
+      message("Image saved to: ", output_path)
     },
     error = function(e) {
-      cat("Could not process screenshot:", conditionMessage(e), "\n")
+      warning("Could not process screenshot: ", conditionMessage(e))
     }
   )
 
   b$close()
+  chr$close()
+
+  # Close any remaining supervisor FIFOs from chromote/processx
+  cons <- showConnections(all = TRUE)
+  if (nrow(cons) > 0) {
+    fifo_ids <- rownames(cons)[
+      cons[, "class"] == "fifo" &
+      grepl("supervisor", cons[, "description"])
+    ]
+    for (id in fifo_ids) {
+      try(close(getConnection(as.integer(id))), silent = TRUE)
+    }
+  }
 }

@@ -9,6 +9,8 @@ Description: Creates a responsive HTML file with tiled hexagonal logos for packa
     specified with a character vector. Output can be saved as a static screenshot in PNG format using a headless browser.
 License: MIT + file LICENSE
 Suggests:
+    knitr,
+    rmarkdown,
     rsvg,
     testthat (>= 3.0.0),
     withr
@@ -27,4 +29,3 @@ Imports:
     magick,
     purrr,
     htmltools,
-    knitr

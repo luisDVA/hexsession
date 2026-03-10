@@ -14,18 +14,14 @@
 #' @return Path to the output HTML file when called interactively, or an
 #'   `htmltools` HTML object when rendered inside Quarto or R Markdown.
 #'
-#' @examples
-#' \dontrun{
-#' # Tile for a specific set of packages
-#' make_tile(packages = c("ggplot2", "dplyr", "tidyr"))
-#'
-#' # Tile for all loaded packages on a dark background
-#' make_tile(dark_mode = TRUE)
-#' }
+#' @examplesIf nzchar(Sys.which("quarto")) && requireNamespace("rmarkdown", quietly = TRUE)
+#' img1 <- system.file("extdata/rectLight.png", package = "hexsession")
+#' img2 <- system.file("extdata/rectMed.png", package = "hexsession")
+#' img3 <- system.file("extdata/rectDark.png", package = "hexsession")
+#' withr::with_tempdir(make_tile(local_images = c(img1, img2, img3)))
 #'
 #' @importFrom jsonlite toJSON
 #' @importFrom base64enc base64encode
-#' @importFrom knitr is_html_output
 #' @export
 #' @details
 #' Set the execution options to `output: asis` in Quarto revealjs presentations to enable raw markdown output and adequate rendering of the tiles.
@@ -152,7 +148,10 @@ make_tile <- function(
     )
     system(quarto_call)
 
-    if (isTRUE(getOption("knitr.in.progress")) && knitr::is_html_output()) {
+    in_html_knitr <- isTRUE(getOption("knitr.in.progress")) &&
+      requireNamespace("knitr", quietly = TRUE) &&
+      tryCatch(knitr::is_html_output(), error = function(e) FALSE)
+    if (in_html_knitr) {
       html_content <- readLines(
         file.path(temp_dir, "_hexout.html"),
         warn = FALSE
@@ -173,8 +172,14 @@ make_tile <- function(
       # Return raw HTML to be embedded
       return(htmltools::HTML(div_content))
     } else if (isFALSE(getOption("knitr.in.progress"))) {
+      html_out <- file.path(temp_dir, "_hexout.html")
       viewer <- getOption("viewer")
-      viewer(file.path(temp_dir, "_hexout.html"))
+      if (!is.null(viewer)) {
+        viewer(html_out)
+      } else {
+        message("Tile saved to: ", html_out)
+      }
+      invisible(html_out)
     }
   } else {
     return(htmltools::HTML("<p>No valid package logos found to display.</p>"))

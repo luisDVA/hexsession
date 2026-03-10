@@ -1,13 +1,16 @@
 #' Get package data
 #' @param packages Character vector of package names (default is NULL, uses loaded packages)
 #' @return A list containing logopaths, urls, and package names
-#' @importFrom utils installed.packages
 get_pkg_data <- function(packages = NULL) {
   if (is.null(packages)) {
     packages <- getLoaded()
   } else {
     # Check if specified packages are installed
-    not_installed <- packages[!packages %in% installed.packages()[, "Package"]]
+    not_installed <- packages[vapply(
+      packages,
+      function(p) length(find.package(p, quiet = TRUE)) == 0L,
+      logical(1L)
+    )]
     if (length(not_installed) > 0) {
       stop(
         "The following packages are not installed: ",

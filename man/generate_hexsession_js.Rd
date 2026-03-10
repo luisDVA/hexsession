@@ -38,7 +38,6 @@ dark/light mode CSS variable assignments.
 Generate JavaScript file for hexsession
 }
 \examples{
-\dontrun{
 img <- system.file("extdata/rectLight.png", package = "hexsession")
 out <- tempfile(fileext = ".js")
 generate_hexsession_js(
@@ -47,6 +46,5 @@ generate_hexsession_js(
   dark_mode = FALSE,
   output_js = out
 )
-}
 
 }
