@@ -75,11 +75,8 @@ the tiles.
 ## Examples
 
 ``` r
-if (FALSE) { # \dontrun{
-# Tile for a specific set of packages
-make_tile(packages = c("ggplot2", "dplyr", "tidyr"))
-
-# Tile for all loaded packages on a dark background
-make_tile(dark_mode = TRUE)
-} # }
+img1 <- system.file("extdata/rectLight.png", package = "hexsession")
+img2 <- system.file("extdata/rectMed.png", package = "hexsession")
+img3 <- system.file("extdata/rectDark.png", package = "hexsession")
+withr::with_tempdir(make_tile(local_images = c(img1, img2, img3)))
 ```

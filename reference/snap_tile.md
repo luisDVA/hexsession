@@ -38,9 +38,7 @@ Path to the saved PNG image (the value of `output_path`).
 ## Examples
 
 ``` r
-if (FALSE) { # \dontrun{
-# First create a tile with make_tile(), then capture it
-make_tile(packages = c("ggplot2", "dplyr"))
-snap_tile("my_tile.png", screen_width = 1000, screen_height = 800)
-} # }
+if (FALSE) { # file.exists("temp_hexsession/_hexout.html") && nzchar(tryCatch(chromote::find_chrome(), error = function(e) ""))
+snap_tile(tempfile(fileext = ".png"))
+}
 ```
