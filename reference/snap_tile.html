@@ -42,7 +42,8 @@
 <span>  <span class="va">output_path</span>,</span>
 <span>  screen_width <span class="op">=</span> <span class="fl">800</span>,</span>
 <span>  screen_height <span class="op">=</span> <span class="fl">700</span>,</span>
-<span>  dark_mode <span class="op">=</span> <span class="cn">FALSE</span></span>
+<span>  dark_mode <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  output_dir <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/tempfile.html" class="external-link">tempdir</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="op">)</span></span></code></pre></div>
     </div>
 
@@ -65,6 +66,12 @@
 <dt id="arg-dark-mode">dark_mode<a class="anchor" aria-label="anchor" href="#arg-dark-mode"></a></dt>
 <dd><p>Is the tile being saved dark or light mode?</p></dd>
 
+
+<dt id="arg-output-dir">output_dir<a class="anchor" aria-label="anchor" href="#arg-output-dir"></a></dt>
+<dd><p>Directory where <code><a href="make_tile.html">make_tile()</a></code> wrote its files.
+Must match the <code>output_dir</code> used in the preceding <code><a href="make_tile.html">make_tile()</a></code> call.
+Defaults to <code><a href="https://rdrr.io/r/base/tempfile.html" class="external-link">tempdir()</a></code> to match <code><a href="make_tile.html">make_tile()</a></code>'s default.</p></dd>
+
 </dl></div>
     <div class="section level2">
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
@@ -73,9 +80,8 @@
 
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span> <span class="co"># file.exists("temp_hexsession/_hexout.html") &amp;&amp; nzchar(tryCatch(chromote::find_chrome(), error = function(e) ""))</span></span></span>
-<span class="r-in"><span><span class="fu">snap_tile</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/tempfile.html" class="external-link">tempfile</a></span><span class="op">(</span>fileext <span class="op">=</span> <span class="st">".png"</span><span class="op">)</span><span class="op">)</span></span></span>
-<span class="r-in"><span><span class="op">}</span></span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu">snap_tile</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/tempfile.html" class="external-link">tempfile</a></span><span class="op">(</span>fileext <span class="op">=</span> <span class="st">".png"</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Image saved to: /tmp/RtmpWRaRMP/file26be4cde8992.png</span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>

@@ -9,7 +9,8 @@ snap_tile(
   output_path,
   screen_width = 800,
   screen_height = 700,
-  dark_mode = FALSE
+  dark_mode = FALSE,
+  output_dir = tempdir()
 )
 ```
 
@@ -31,6 +32,17 @@ snap_tile(
 
   Is the tile being saved dark or light mode?
 
+- output_dir:
+
+  Directory where
+  [`make_tile()`](https://luisdva.github.io/hexsession/reference/make_tile.md)
+  wrote its files. Must match the `output_dir` used in the preceding
+  [`make_tile()`](https://luisdva.github.io/hexsession/reference/make_tile.md)
+  call. Defaults to [`tempdir()`](https://rdrr.io/r/base/tempfile.html)
+  to match
+  [`make_tile()`](https://luisdva.github.io/hexsession/reference/make_tile.md)'s
+  default.
+
 ## Value
 
 Path to the saved PNG image (the value of `output_path`).
@@ -38,7 +50,6 @@ Path to the saved PNG image (the value of `output_path`).
 ## Examples
 
 ``` r
-if (FALSE) { # file.exists("temp_hexsession/_hexout.html") && nzchar(tryCatch(chromote::find_chrome(), error = function(e) ""))
 snap_tile(tempfile(fileext = ".png"))
-}
+#> Image saved to: /tmp/RtmpWRaRMP/file26be4cde8992.png
 ```
