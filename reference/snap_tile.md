@@ -51,5 +51,5 @@ Path to the saved PNG image (the value of `output_path`).
 
 ``` r
 snap_tile(tempfile(fileext = ".png"))
-#> Image saved to: /tmp/RtmpWRaRMP/file26be4cde8992.png
+#> Image saved to: /tmp/RtmpSayEwY/file263b5e5e08b9.png
 ```

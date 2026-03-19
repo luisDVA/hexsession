@@ -92,5 +92,5 @@ img2 <- system.file("extdata/rectMed.png", package = "hexsession")
 img3 <- system.file("extdata/rectDark.png", package = "hexsession")
 # The returned path shows where the HTML was saved
 path <- make_tile(local_images = c(img1, img2, img3))
-#> Tile saved to: /tmp/RtmpWRaRMP/temp_hexsession/_hexout.html
+#> Tile saved to: /tmp/RtmpSayEwY/temp_hexsession/_hexout.html
 ```
