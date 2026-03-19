@@ -8,7 +8,8 @@ snap_tile(
   output_path,
   screen_width = 800,
   screen_height = 700,
-  dark_mode = FALSE
+  dark_mode = FALSE,
+  output_dir = tempdir()
 )
 }
 \arguments{
@@ -19,6 +20,10 @@ snap_tile(
 \item{screen_height}{Height of the browser window}
 
 \item{dark_mode}{Is the tile being saved dark or light mode?}
+
+\item{output_dir}{Directory where \code{make_tile()} wrote its files.
+Must match the \code{output_dir} used in the preceding \code{make_tile()} call.
+Defaults to \code{tempdir()} to match \code{make_tile()}'s default.}
 }
 \value{
 Path to the saved PNG image (the value of \code{output_path}).
@@ -27,7 +32,7 @@ Path to the saved PNG image (the value of \code{output_path}).
 Take screenshot of html image tile
 }
 \examples{
-\dontshow{if (file.exists("temp_hexsession/_hexout.html") && nzchar(tryCatch(chromote::find_chrome(), error = function(e) ""))) withAutoprint(\{ # examplesIf}
+\dontshow{if (file.exists(file.path(tempdir(), "temp_hexsession", "_hexout.html")) && nzchar(tryCatch(chromote::find_chrome(), error = function(e) ""))) withAutoprint(\{ # examplesIf}
 snap_tile(tempfile(fileext = ".png"))
 \dontshow{\}) # examplesIf}
 }

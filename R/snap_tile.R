@@ -4,9 +4,12 @@
 #' @param screen_width Width of the browser window
 #' @param screen_height Height of the browser window
 #' @param dark_mode Is the tile being saved dark or light mode?
+#' @param output_dir Directory where `make_tile()` wrote its files.
+#'   Must match the `output_dir` used in the preceding `make_tile()` call.
+#'   Defaults to `tempdir()` to match `make_tile()`'s default.
 #' @return Path to the saved PNG image (the value of `output_path`).
 #'
-#' @examplesIf file.exists("temp_hexsession/_hexout.html") && nzchar(tryCatch(chromote::find_chrome(), error = function(e) ""))
+#' @examplesIf file.exists(file.path(tempdir(), "temp_hexsession", "_hexout.html")) && nzchar(tryCatch(chromote::find_chrome(), error = function(e) ""))
 #' snap_tile(tempfile(fileext = ".png"))
 #'
 #' @export
@@ -14,7 +17,8 @@ snap_tile <- function(
   output_path,
   screen_width = 800,
   screen_height = 700,
-  dark_mode = FALSE
+  dark_mode = FALSE,
+  output_dir = tempdir()
 ) {
   b_color <- if (dark_mode == TRUE) {
     "black"
@@ -22,7 +26,7 @@ snap_tile <- function(
     "white"
   }
 
-  html_path <- "temp_hexsession/_hexout.html"
+  html_path <- file.path(output_dir, "temp_hexsession", "_hexout.html")
 
   # Check for hex tile HTML file
   if (!file.exists(html_path)) {

@@ -48,7 +48,7 @@ For a given session with libraries loaded in addition to base packages:
 hexsession::make_tile(packages=c("terra","sf","tidyr"))
 ```
 
-The `make_tile()` function will render the HTML output in a new folder in the working directory using a Quarto template file that will also be copied to this new directory.
+The `make_tile()` function renders the HTML output using a Quarto template and writes the result to a `temp_hexsession/` subfolder inside `tempdir()` by default. The function returns the path to the HTML file and prints it as a message, so you always know where to find it. To write the output to your project directory instead, pass `output_dir = getwd()` (or any other path).
 
 For a session with the following packages loaded: 
 

@@ -10,15 +10,20 @@
 #' @param color_arrange Logical, whether to arrange the images by color along the 'Lab' color space (defaults to FALSE)
 #' @param highlight_mode Logical, dim all images except on hover (defaults to FALSE)
 #' @param focus A character vector of package names to highlight, dimming all others (defaults to NULL)
+#' @param output_dir Directory where the intermediate Quarto template, js, rds, and HTML outputs are written. Defaults to `tempdir()`. To keep the output HTML in your
+#'   project folder, pass `output_dir = getwd()` or any other path. The
+#'   returned value and a console message both show the exact file location.
 #' @details If an installed package does not have a bundled logo, or if the logo has been added to .Rbuildignore, a generic logo with the name of the package will be created instead. When the function cannot locate a package logo unambiguously, users will be prompted to select one from a list of potential options.
-#' @return Path to the output HTML file when called interactively, or an
+#' @return The path to the output HTML file (invisibly) when called
+#'   interactively. A `message()` also prints the location. Returns an
 #'   `htmltools` HTML object when rendered inside Quarto or R Markdown.
 #'
 #' @examplesIf nzchar(Sys.which("quarto")) && requireNamespace("rmarkdown", quietly = TRUE)
 #' img1 <- system.file("extdata/rectLight.png", package = "hexsession")
 #' img2 <- system.file("extdata/rectMed.png", package = "hexsession")
 #' img3 <- system.file("extdata/rectDark.png", package = "hexsession")
-#' withr::with_tempdir(make_tile(local_images = c(img1, img2, img3)))
+#' # The returned path shows where the HTML was saved
+#' path <- make_tile(local_images = c(img1, img2, img3))
 #'
 #' @importFrom jsonlite toJSON
 #' @importFrom base64enc base64encode
@@ -33,9 +38,10 @@ make_tile <- function(
   dark_mode = FALSE,
   color_arrange = FALSE,
   highlight_mode = FALSE,
-  focus = NULL
+  focus = NULL,
+  output_dir = tempdir()
 ) {
-  temp_dir <- file.path(getwd(), "temp_hexsession")
+  temp_dir <- file.path(output_dir, "temp_hexsession")
   dir.create(temp_dir, showWarnings = FALSE)
 
   if (is.null(local_images)) {
@@ -171,15 +177,14 @@ make_tile <- function(
 
       # Return raw HTML to be embedded
       return(htmltools::HTML(div_content))
-    } else if (isFALSE(getOption("knitr.in.progress"))) {
+    } else if (!isTRUE(getOption("knitr.in.progress"))) {
       html_out <- file.path(temp_dir, "_hexout.html")
+      message("Tile saved to: ", html_out)
       viewer <- getOption("viewer")
       if (!is.null(viewer)) {
         viewer(html_out)
-      } else {
-        message("Tile saved to: ", html_out)
       }
-      invisible(html_out)
+      return(invisible(html_out))
     }
   } else {
     return(htmltools::HTML("<p>No valid package logos found to display.</p>"))

@@ -19,13 +19,7 @@ base packages). Also supports vectors with paths to local images.
 
 ## Installation
 
-You can install the released version of hexsession from CRAN:
-
-``` r
-install.packages("hexsession")
-```
-
-Or install the development version from GitHub:
+Install the development version from GitHub:
 
 ``` r
 # install.packages("remotes")
@@ -53,9 +47,12 @@ For a given session with libraries loaded in addition to base packages:
 hexsession::make_tile(packages=c("terra","sf","tidyr"))
 ```
 
-The `make_tile()` function will render the HTML output in a new folder
-in the working directory using a Quarto template file that will also be
-copied to this new directory.
+The `make_tile()` function renders the HTML output using a Quarto
+template and writes the result to a `temp_hexsession/` subfolder inside
+`tempdir()` by default. The function returns the path to the HTML file
+and prints it as a message, so you always know where to find it. To
+write the output to your project directory instead, pass
+`output_dir = getwd()` (or any other path).
 
 For a session with the following packages loaded:
 
@@ -96,7 +93,7 @@ The result:
 ### Highlight mode
 
 Set `highlight_mode` to `TRUE` if you want a tile in which all images
-are dimmed except the one being hovered over, to emphazise individual
+are dimmed except the one being hovered over, to emphasize individual
 packages interactively:
 
 ``` r
@@ -154,4 +151,6 @@ All feedback is welcome in any form (issues, pull requests, etc.)
   written with input from the Claude 3.5 Sonnet LLM running in the
   Continue extension in the Positron IDE. Further refinements to the
   code were added using Claude Sonnet 4 running in the Positron
-  Assistant extension. All outputs double-checked and edited by LDVA.
+  Assistant extension. Latest checks were now aided by Posit Assitant
+  (beta) running in RStudio with Claude Sonnet 4.6. All outputs
+  double-checked and edited by LDVA.

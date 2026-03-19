@@ -6,7 +6,7 @@
 
 Test environments:  
 
-linux x86_64-pc-linux-gnu Ubuntu 24.04.3 LTS - Ubuntu 11.4.0-1ubuntu1~22.04.3  
+linux x86_64-pc-linux-gnu Ubuntu 24.04.3 LTS - Ubuntu 13.3.0-6ubuntu2~24.04.01  
   
 Windows Server 2022 x64 (build 26100) - x86_64-w64-mingw32
 
@@ -24,11 +24,19 @@ so they are skipped in environments where Quarto is not installed. Examples for
 browser, and are guarded accordingly. On CRAN check servers where Quarto is not
 available, both sets of examples will be skipped.
 
-## Changes for resubmission
+## Changes for first resubmission
 
 * Replaced `\dontrun{}` with `\donttest{}`/`@examplesIf` throughout, as requested.
 * `cat()` calls in `snap_tile()` replaced with `message()` and `warning()`.
 * `installed.packages()` in `get_pkg_data()` replaced with `find.package()` as
   recommended in the `installed.packages()` help page.
+
+## Changes for second resubmission
+
+* `make_tile()` and `snap_tile()` now accept an `output_dir` parameter
+  (default: `tempdir()`) so that intermediate HTML and supporting files are
+  no longer written to the user's working directory by default. Users who wish
+  to keep the output HTML in their project can pass `output_dir = getwd()`.
+  The returned path and a `message()` always show the exact file location.
 
 

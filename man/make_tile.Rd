@@ -11,7 +11,8 @@ make_tile(
   dark_mode = FALSE,
   color_arrange = FALSE,
   highlight_mode = FALSE,
-  focus = NULL
+  focus = NULL,
+  output_dir = tempdir()
 )
 }
 \arguments{
@@ -28,9 +29,14 @@ make_tile(
 \item{highlight_mode}{Logical, dim all images except on hover (defaults to FALSE)}
 
 \item{focus}{A character vector of package names to highlight, dimming all others (defaults to NULL)}
+
+\item{output_dir}{Directory where the intermediate Quarto template, js, rds, and HTML outputs are written. Defaults to \code{tempdir()}. To keep the output HTML in your
+project folder, pass \code{output_dir = getwd()} or any other path. The
+returned value and a console message both show the exact file location.}
 }
 \value{
-Path to the output HTML file when called interactively, or an
+The path to the output HTML file (invisibly) when called
+interactively. A \code{message()} also prints the location. Returns an
 \code{htmltools} HTML object when rendered inside Quarto or R Markdown.
 }
 \description{
@@ -46,6 +52,7 @@ Set the execution options to \code{output: asis} in Quarto revealjs presentation
 img1 <- system.file("extdata/rectLight.png", package = "hexsession")
 img2 <- system.file("extdata/rectMed.png", package = "hexsession")
 img3 <- system.file("extdata/rectDark.png", package = "hexsession")
-withr::with_tempdir(make_tile(local_images = c(img1, img2, img3)))
+# The returned path shows where the HTML was saved
+path <- make_tile(local_images = c(img1, img2, img3))
 \dontshow{\}) # examplesIf}
 }
