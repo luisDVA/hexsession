@@ -32,7 +32,7 @@ Path to the saved PNG image (the value of \code{output_path}).
 Take screenshot of html image tile
 }
 \examples{
-\dontshow{if (file.exists(file.path(tempdir(), "temp_hexsession", "_hexout.html")) && nzchar(tryCatch(chromote::find_chrome(), error = function(e) ""))) withAutoprint(\{ # examplesIf}
+\dontshow{if (file.exists(file.path(tempdir(), "temp_hexsession", "_hexout.html")) && isTRUE(nzchar(tryCatch(chromote::find_chrome(), error = function(e) "")))) withAutoprint(\{ # examplesIf}
 snap_tile(tempfile(fileext = ".png"))
 \dontshow{\}) # examplesIf}
 }

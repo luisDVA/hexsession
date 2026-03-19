@@ -9,7 +9,7 @@
 #'   Defaults to `tempdir()` to match `make_tile()`'s default.
 #' @return Path to the saved PNG image (the value of `output_path`).
 #'
-#' @examplesIf file.exists(file.path(tempdir(), "temp_hexsession", "_hexout.html")) && nzchar(tryCatch(chromote::find_chrome(), error = function(e) ""))
+#' @examplesIf file.exists(file.path(tempdir(), "temp_hexsession", "_hexout.html")) && isTRUE(nzchar(tryCatch(chromote::find_chrome(), error = function(e) "")))
 #' snap_tile(tempfile(fileext = ".png"))
 #'
 #' @export
