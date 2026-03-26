@@ -58,8 +58,8 @@ make_tile(
 
 - output_dir:
 
-  Directory where the intermediate Quarto template, js, rds, and HTML
-  outputs are written. Defaults to
+  Directory where the intermediate js, rds, and HTML outputs are
+  written. Defaults to
   [`tempdir()`](https://rdrr.io/r/base/tempfile.html). To keep the
   output HTML in your project folder, pass `output_dir = getwd()` or any
   other path. The returned value and a console message both show the
@@ -90,7 +90,6 @@ the tiles.
 img1 <- system.file("extdata/rectLight.png", package = "hexsession")
 img2 <- system.file("extdata/rectMed.png", package = "hexsession")
 img3 <- system.file("extdata/rectDark.png", package = "hexsession")
-# The returned path shows where the HTML was saved
 path <- make_tile(local_images = c(img1, img2, img3))
-#> Tile saved to: /tmp/RtmpEVgeGn/temp_hexsession/_hexout.html
+#> Tile saved to: /tmp/Rtmp0vUPGK/temp_hexsession/_hexout.html
 ```

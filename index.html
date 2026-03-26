@@ -81,7 +81,7 @@
 <code class="sourceCode R"><span></span>
 <span><span class="co"># custom set of packages</span></span>
 <span><span class="fu">hexsession</span><span class="fu">::</span><span class="fu"><a href="reference/make_tile.html">make_tile</a></span><span class="op">(</span>packages<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"terra"</span>,<span class="st">"sf"</span>,<span class="st">"tidyr"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-<p>The <code><a href="reference/make_tile.html">make_tile()</a></code> function renders the HTML output using a Quarto template and writes the result to a <code>temp_hexsession/</code> subfolder inside <code><a href="https://rdrr.io/r/base/tempfile.html" class="external-link">tempdir()</a></code> by default. The function returns the path to the HTML file and prints it as a message, so you always know where to find it. To write the output to your project directory instead, pass <code>output_dir = getwd()</code> (or any other path).</p>
+<p>The <code><a href="reference/make_tile.html">make_tile()</a></code> function generates a self-contained HTML file and writes it to a <code>temp_hexsession/</code> subfolder inside <code><a href="https://rdrr.io/r/base/tempfile.html" class="external-link">tempdir()</a></code> by default. The function returns the path to the HTML file and prints it as a message, so you always know where to find it. To write the output to your project directory instead, pass <code>output_dir = getwd()</code> (or any other path).</p>
 <p>For a session with the following packages loaded:</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/luisDVA/annotater" class="external-link">annotater</a></span><span class="op">)</span></span>
@@ -137,7 +137,7 @@
 <div class="section level2">
 <h2 id="notes">Notes<a class="anchor" aria-label="anchor" href="#notes"></a>
 </h2>
-<p>This packages depends on working installations of magick, Quarto, and chromote and thus needs a Chromium-based web browser (e.g., Chrome, Chromium, Opera, or Vivaldi) installation.</p>
+<p>This package depends on working installations of magick and chromote, and thus requires a Chromium-based web browser (e.g., Chrome, Chromium, Opera, or Vivaldi) for <code><a href="reference/snap_tile.html">snap_tile()</a></code>.</p>
 <p>hexsession is very much work in progress and highly experimental. I am still learning good-practices for packages that create files and directories, use system commands, and launch browser sessions.</p>
 <p>All feedback is welcome in any form (issues, pull requests, etc.)</p>
 <div class="section level3">
@@ -145,7 +145,7 @@
 </h3>
 <ul>
 <li><p>css and html code for the responsive hex grid comes from <a href="https://css-tricks.com/hexagons-and-beyond-flexible-responsive-grid-patterns-sans-media-queries/" class="external-link">this tutorial</a> by Temani Afif.</p></li>
-<li><p>The javascript code to populate the divs in the Quarto template was written with input from the Claude 3.5 Sonnet LLM running in the Continue extension in the Positron IDE. Further refinements to the code were added using Claude Sonnet 4 running in the Positron Assistant extension. Latest checks were now aided by Posit Assitant (beta) running in RStudio with Claude Sonnet 4.6. All outputs double-checked and edited by LDVA.</p></li>
+<li><p>The javascript code to populate the divs in the HTML template was written with input from the Claude 3.5 Sonnet LLM running in the Continue extension in the Positron IDE. Further refinements to the code were added using Claude Sonnet 4 running in the Positron Assistant extension. Latest checks were now aided by Posit Assistant (beta) running in RStudio with Claude Sonnet 4.6. All outputs double-checked and edited by LDVA.</p></li>
 </ul>
 </div>
 </div>

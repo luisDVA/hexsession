@@ -10,7 +10,7 @@ snap_tile(
   screen_width = 800,
   screen_height = 700,
   dark_mode = FALSE,
-  output_dir = tempdir()
+  output_dir = getwd()
 )
 ```
 
@@ -38,10 +38,10 @@ snap_tile(
   [`make_tile()`](https://luisdva.github.io/hexsession/reference/make_tile.md)
   wrote its files. Must match the `output_dir` used in the preceding
   [`make_tile()`](https://luisdva.github.io/hexsession/reference/make_tile.md)
-  call. Defaults to [`tempdir()`](https://rdrr.io/r/base/tempfile.html)
-  to match
-  [`make_tile()`](https://luisdva.github.io/hexsession/reference/make_tile.md)'s
-  default.
+  call. Defaults to [`getwd()`](https://rdrr.io/r/base/getwd.html). To
+  snap a tile written to
+  [`tempdir()`](https://rdrr.io/r/base/tempfile.html), pass
+  `output_dir = tempdir()` explicitly.
 
 ## Value
 
@@ -50,6 +50,7 @@ Path to the saved PNG image (the value of `output_path`).
 ## Examples
 
 ``` r
+if (FALSE) { # file.exists(file.path(getwd(), "temp_hexsession", "_hexout.html")) && isTRUE(nzchar(tryCatch(chromote::find_chrome(), error = function(e) "")))
 snap_tile(tempfile(fileext = ".png"))
-#> Image saved to: /tmp/RtmpEVgeGn/file262953cfa0f1.png
+}
 ```

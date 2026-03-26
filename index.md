@@ -38,8 +38,8 @@ hexsession::make_tile(packages=c("terra","sf","tidyr"))
 
 The
 [`make_tile()`](https://luisdva.github.io/hexsession/reference/make_tile.md)
-function renders the HTML output using a Quarto template and writes the
-result to a `temp_hexsession/` subfolder inside
+function generates a self-contained HTML file and writes it to a
+`temp_hexsession/` subfolder inside
 [`tempdir()`](https://rdrr.io/r/base/tempfile.html) by default. The
 function returns the path to the HTML file and prints it as a message,
 so you always know where to find it. To write the output to your project
@@ -123,9 +123,10 @@ make_tile(packages = c("tidyterra", "sf"),
 
 ## Notes
 
-This packages depends on working installations of magick, Quarto, and
-chromote and thus needs a Chromium-based web browser (e.g., Chrome,
-Chromium, Opera, or Vivaldi) installation.
+This package depends on working installations of magick and chromote,
+and thus requires a Chromium-based web browser (e.g., Chrome, Chromium,
+Opera, or Vivaldi) for
+[`snap_tile()`](https://luisdva.github.io/hexsession/reference/snap_tile.md).
 
 hexsession is very much work in progress and highly experimental. I am
 still learning good-practices for packages that create files and
@@ -139,10 +140,10 @@ All feedback is welcome in any form (issues, pull requests, etc.)
   tutorial](https://css-tricks.com/hexagons-and-beyond-flexible-responsive-grid-patterns-sans-media-queries/)
   by Temani Afif.
 
-- The javascript code to populate the divs in the Quarto template was
+- The javascript code to populate the divs in the HTML template was
   written with input from the Claude 3.5 Sonnet LLM running in the
   Continue extension in the Positron IDE. Further refinements to the
   code were added using Claude Sonnet 4 running in the Positron
-  Assistant extension. Latest checks were now aided by Posit Assitant
+  Assistant extension. Latest checks were now aided by Posit Assistant
   (beta) running in RStudio with Claude Sonnet 4.6. All outputs
   double-checked and edited by LDVA.
