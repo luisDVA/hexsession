@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>hexsession</title>
+</head>
+<body>
+<script>
+{{JS_CONTENT}}
+</script>
+
+<div class="main">
+  <div class="container" id="imageContainer">
+    <!-- Images will be dynamically added here -->
+  </div>
+  <div class="attribution">
+    created with <a href="https://github.com/luisdva/hexsession" target="_blank">hexsession</a>
+  </div>
+</div>
+
+<style>
+body {
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+}
+
+.main {
+  position: relative;
+  display: flex;
+  --s: 100px;  /* size */
+  --m: 2px;    /* margin */
+  --f: calc(1.732 * var(--s) + 4 * var(--m) - 1px);
+}
+
+.container {
+  font-size: 0;
+  max-width: 100%;
+}
+
+.container div {
+  width: var(--s);
+  margin: var(--m);
+  height: calc(var(--s)*1.1547);
+  display: inline-block;
+  font-size: initial;
+  clip-path: polygon(0% 25%, 0% 75%, 50% 100%, 100% 75%, 100% 25%, 50% 0%);
+  background: var(--tile-bg);
+  margin-bottom: calc(var(--m) - var(--s)*0.2885);
+  overflow: hidden;
+  transition: all 0.3s ease;
+}
+
+.container::before {
+  content: "";
+  width: calc(var(--s)/2 + var(--m));
+  float: left;
+  height: 120%;
+  shape-outside: repeating-linear-gradient(
+                   #0000 0 calc(var(--f) - 3px),
+                   #000  0 var(--f));
+}
+
+.container div img {
+  margin: 0;
+  max-width: unset;
+  max-height: unset;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: all 0.3s ease;
+}
+
+.container a {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+/* Regular hover effect */
+.container:not(.highlight-mode):not(.focus-mode) div:hover {
+  z-index: 1;
+  transform: scale(1.05);
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+.container:not(.highlight-mode):not(.focus-mode) div:hover img {
+  filter: brightness(1.1);
+}
+
+/* Highlight mode styles */
+.container.highlight-mode div {
+  opacity: 0.3;
+  filter: grayscale(0.7) brightness(0.6);
+}
+
+.container.highlight-mode div:hover {
+  opacity: 1;
+  filter: grayscale(0) brightness(1);
+  z-index: 1;
+  transform: scale(1.08);
+  box-shadow: 0 6px 12px rgba(0,0,0,0.2);
+}
+
+/* Focus mode styles */
+.container.focus-mode div {
+  opacity: 0.3;
+  filter: grayscale(0.7) brightness(0.6);
+  transition: all 0.3s ease;
+}
+
+.container.focus-mode div.focused {
+  opacity: 1;
+  filter: grayscale(0) brightness(1);
+  z-index: 1;
+  transform: scale(1.05);
+}
+
+.container.focus-mode div:hover {
+  opacity: 1;
+  filter: grayscale(0) brightness(1);
+  z-index: 2;
+  transform: scale(1.08);
+  box-shadow: 0 6px 12px rgba(0,0,0,0.2);
+}
+
+.attribution {
+  position: absolute;
+  bottom: -44px;
+  right: 40px;
+  font-size: 0.8em;
+  color: var(--text-color);
+  background-color: var(--attribution-bg);
+  padding: 2px 5px;
+  border-radius: 3px;
+  z-index: 10;
+  pointer-events: none;
+}
+
+.attribution a {
+  color: var(--link-color);
+  text-decoration: none;
+  pointer-events: auto;
+}
+
+.attribution a:hover {
+  text-decoration: underline;
+}
+
+@media screen and (max-width: 1200px) {
+  .main {
+    --s: 96px;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .main {
+    --s: 80px;
+  }
+}
+</style>
+
+</body>
+</html>

@@ -9,7 +9,7 @@ snap_tile(
   screen_width = 800,
   screen_height = 700,
   dark_mode = FALSE,
-  output_dir = tempdir()
+  output_dir = getwd()
 )
 }
 \arguments{
@@ -23,7 +23,8 @@ snap_tile(
 
 \item{output_dir}{Directory where \code{make_tile()} wrote its files.
 Must match the \code{output_dir} used in the preceding \code{make_tile()} call.
-Defaults to \code{tempdir()} to match \code{make_tile()}'s default.}
+Defaults to \code{getwd()}. To snap a tile written to \code{tempdir()}, pass
+\code{output_dir = tempdir()} explicitly.}
 }
 \value{
 Path to the saved PNG image (the value of \code{output_path}).
@@ -32,7 +33,7 @@ Path to the saved PNG image (the value of \code{output_path}).
 Take screenshot of html image tile
 }
 \examples{
-\dontshow{if (file.exists(file.path(tempdir(), "temp_hexsession", "_hexout.html")) && isTRUE(nzchar(tryCatch(chromote::find_chrome(), error = function(e) "")))) withAutoprint(\{ # examplesIf}
+\dontshow{if (file.exists(file.path(getwd(), "temp_hexsession", "_hexout.html")) && isTRUE(nzchar(tryCatch(chromote::find_chrome(), error = function(e) "")))) withAutoprint(\{ # examplesIf}
 snap_tile(tempfile(fileext = ".png"))
 \dontshow{\}) # examplesIf}
 }
