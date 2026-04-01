@@ -8,7 +8,7 @@
 ## Citation
 
 Source:
-[`DESCRIPTION`](https://github.com/luisDVA/hexsession/blob/main/DESCRIPTION)
+[`DESCRIPTION`](https://github.com/luisDVA/hexsession/blob/v0.1.0/DESCRIPTION)
 
 Verde Arregoitia L (2026). *hexsession: Create a Tile of Logos for
 Loaded Packages*. R package version 0.1.0,

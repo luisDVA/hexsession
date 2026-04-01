@@ -91,5 +91,5 @@ img1 <- system.file("extdata/rectLight.png", package = "hexsession")
 img2 <- system.file("extdata/rectMed.png", package = "hexsession")
 img3 <- system.file("extdata/rectDark.png", package = "hexsession")
 path <- make_tile(local_images = c(img1, img2, img3))
-#> Tile saved to: /tmp/RtmpwaSEqk/temp_hexsession/_hexout.html
+#> Tile saved to: /tmp/RtmpfKDVdJ/temp_hexsession/_hexout.html
 ```
