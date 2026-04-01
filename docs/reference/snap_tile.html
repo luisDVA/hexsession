@@ -7,7 +7,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">hexsession</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.0.9000</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.1.0</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -16,6 +16,7 @@
 
     <div id="navbar" class="collapse navbar-collapse ms-3">
       <ul class="navbar-nav me-auto"><li class="active nav-item"><a class="nav-link" href="../reference/index.html">Reference</a></li>
+<li class="nav-item"><a class="nav-link" href="../news/index.html">Changelog</a></li>
       </ul><ul class="navbar-nav"><li class="nav-item"><form class="form-inline" role="search">
  <input class="form-control" type="search" name="search-input" id="search-input" autocomplete="off" aria-label="Search site" placeholder="Search for" data-search-index="../search.json"></form></li>
 <li class="nav-item"><a class="external-link nav-link" href="https://github.com/luisDVA/hexsession/" aria-label="GitHub"><span class="fa fab fa-github fa-lg"></span></a></li>
@@ -41,7 +42,8 @@
 <span>  <span class="va">output_path</span>,</span>
 <span>  screen_width <span class="op">=</span> <span class="fl">800</span>,</span>
 <span>  screen_height <span class="op">=</span> <span class="fl">700</span>,</span>
-<span>  dark_mode <span class="op">=</span> <span class="cn">FALSE</span></span>
+<span>  dark_mode <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  output_dir <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/getwd.html" class="external-link">getwd</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="op">)</span></span></code></pre></div>
     </div>
 
@@ -64,12 +66,26 @@
 <dt id="arg-dark-mode">dark_mode<a class="anchor" aria-label="anchor" href="#arg-dark-mode"></a></dt>
 <dd><p>Is the tile being saved dark or light mode?</p></dd>
 
+
+<dt id="arg-output-dir">output_dir<a class="anchor" aria-label="anchor" href="#arg-output-dir"></a></dt>
+<dd><p>Directory where <code><a href="make_tile.html">make_tile()</a></code> wrote its files.
+Must match the <code>output_dir</code> used in the preceding <code><a href="make_tile.html">make_tile()</a></code> call.
+Defaults to <code><a href="https://rdrr.io/r/base/getwd.html" class="external-link">getwd()</a></code>. To snap a tile written to <code><a href="https://rdrr.io/r/base/tempfile.html" class="external-link">tempdir()</a></code>, pass
+<code>output_dir = tempdir()</code> explicitly.</p></dd>
+
 </dl></div>
     <div class="section level2">
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
-    <p>Path to the saved image</p>
+    <p>Path to the saved PNG image (the value of <code>output_path</code>).</p>
     </div>
 
+    <div class="section level2">
+    <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span> <span class="co"># file.exists(file.path(getwd(), "temp_hexsession", "_hexout.html")) &amp;&amp; isTRUE(nzchar(tryCatch(chromote::find_chrome(), error = function(e) "")))</span></span></span>
+<span class="r-in"><span><span class="fu">snap_tile</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/tempfile.html" class="external-link">tempfile</a></span><span class="op">(</span>fileext <span class="op">=</span> <span class="st">".png"</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="op">}</span></span></span>
+</code></pre></div>
+    </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>
     </nav></aside></div>
 

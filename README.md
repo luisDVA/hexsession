@@ -5,10 +5,13 @@
 
 <!-- badges: start -->
 
-[![Lifecycle:
-experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://lifecycle.r-lib.org/articles/stages.html#experimental)
 [![CRAN
 status](https://www.r-pkg.org/badges/version/hexsession)](https://CRAN.R-project.org/package=hexsession)
+[![CRAN
+downloads](https://cranlogs.r-pkg.org/badges/hexsession)](https://cran.r-project.org/package=hexsession)
+[![CRAN downloads
+total](https://cranlogs.r-pkg.org/badges/grand-total/hexsession)](https://cran.r-project.org/package=hexsession)
+[![r-universe](https://luisdva.r-universe.dev/badges/hexsession)](https://luisdva.r-universe.dev/hexsession)
 <!-- badges: end -->
 
 The goal of hexsession is to create a tile of hexagonal logos for
@@ -19,7 +22,19 @@ base packages). Also supports vectors with paths to local images.
 
 ## Installation
 
-Install the development version from GitHub:
+Install from CRAN:
+
+``` r
+install.packages("hexsession")
+```
+
+Or from r-universe:
+
+``` r
+install.packages('hexsession', repos = c('https://luisdva.r-universe.dev', 'https://cloud.r-project.org'))
+```
+
+Or install the development version from GitHub:
 
 ``` r
 # install.packages("remotes")
@@ -134,10 +149,6 @@ make_tile(packages = c("tidyterra", "sf"),
 This package depends on working installations of magick and chromote,
 and thus requires a Chromium-based web browser (e.g., Chrome, Chromium,
 Opera, or Vivaldi) for `snap_tile()`.
-
-hexsession is very much work in progress and highly experimental. I am
-still learning good-practices for packages that create files and
-directories, use system commands, and launch browser sessions.
 
 All feedback is welcome in any form (issues, pull requests, etc.)
 
