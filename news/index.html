@@ -32,7 +32,7 @@
     </div>
 
     <div class="section level2">
-<h2 class="pkg-version" data-toc-text="0.1.0" id="hexsession-010">hexsession 0.1.0<a class="anchor" aria-label="anchor" href="#hexsession-010"></a></h2>
+<h2 class="pkg-version" data-toc-text="0.1.0" id="hexsession-010">hexsession 0.1.0<a class="anchor" aria-label="anchor" href="#hexsession-010"></a></h2><p class="text-muted">CRAN release: 2026-03-30</p>
 <ul><li>Initial CRAN submission.</li>
 <li>
 <code><a href="../reference/make_tile.html">make_tile()</a></code> and <code><a href="../reference/snap_tile.html">snap_tile()</a></code> gain an <code>output_dir</code> parameter (default: <code><a href="https://rdrr.io/r/base/tempfile.html" class="external-link">tempdir()</a></code>). Previously the intermediate HTML and supporting files were written to a <code>temp_hexsession/</code> folder in the working directory. To restore the old behaviour, pass <code>output_dir = getwd()</code>. The path to the HTML output is always returned by <code><a href="../reference/make_tile.html">make_tile()</a></code> and printed as a message when the viewer is not available.</li>

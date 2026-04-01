@@ -8,7 +8,19 @@ base packages). Also supports vectors with paths to local images.
 
 ## Installation
 
-Install the development version from GitHub:
+Install from CRAN:
+
+``` r
+install.packages("hexsession")
+```
+
+Or from r-universe:
+
+``` r
+install.packages('hexsession', repos = c('https://luisdva.r-universe.dev', 'https://cloud.r-project.org'))
+```
+
+Or install the development version from GitHub:
 
 ``` r
 # install.packages("remotes")
@@ -127,10 +139,6 @@ This package depends on working installations of magick and chromote,
 and thus requires a Chromium-based web browser (e.g., Chrome, Chromium,
 Opera, or Vivaldi) for
 [`snap_tile()`](https://luisdva.github.io/hexsession/reference/snap_tile.md).
-
-hexsession is very much work in progress and highly experimental. I am
-still learning good-practices for packages that create files and
-directories, use system commands, and launch browser sessions.
 
 All feedback is welcome in any form (issues, pull requests, etc.)
 

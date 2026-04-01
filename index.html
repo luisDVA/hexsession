@@ -63,8 +63,14 @@
 <div class="section level2">
 <h2 id="installation">Installation<a class="anchor" aria-label="anchor" href="#installation"></a>
 </h2>
-<p>Install the development version from GitHub:</p>
+<p>Install from CRAN:</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"hexsession"</span><span class="op">)</span></span></code></pre></div>
+<p>Or from r-universe:</p>
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">'hexsession'</span>, repos <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">'https://luisdva.r-universe.dev'</span>, <span class="st">'https://cloud.r-project.org'</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<p>Or install the development version from GitHub:</p>
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># install.packages("remotes")</span></span>
 <span><span class="fu">remotes</span><span class="fu">::</span><span class="fu">install_github</span><span class="op">(</span><span class="st">"luisdva/hexsession"</span><span class="op">)</span></span></code></pre></div>
 </div>
@@ -77,13 +83,13 @@
 <li>If the images bundled with a package do not match ‘hex’ or ‘logo’, or there are multiple possible options, users are prompted to specify which file to use.</li>
 </ul>
 <p>For a given session with libraries loaded in addition to base packages:</p>
-<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span></span>
 <span><span class="co"># custom set of packages</span></span>
 <span><span class="fu">hexsession</span><span class="fu">::</span><span class="fu"><a href="reference/make_tile.html">make_tile</a></span><span class="op">(</span>packages<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"terra"</span>,<span class="st">"sf"</span>,<span class="st">"tidyr"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <p>The <code><a href="reference/make_tile.html">make_tile()</a></code> function generates a self-contained HTML file and writes it to a <code>temp_hexsession/</code> subfolder inside <code><a href="https://rdrr.io/r/base/tempfile.html" class="external-link">tempdir()</a></code> by default. The function returns the path to the HTML file and prints it as a message, so you always know where to find it. To write the output to your project directory instead, pass <code>output_dir = getwd()</code> (or any other path).</p>
 <p>For a session with the following packages loaded:</p>
-<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/luisDVA/annotater" class="external-link">annotater</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://ggforce.data-imaginist.com" class="external-link">ggforce</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://purrr.tidyverse.org/" class="external-link">purrr</a></span><span class="op">)</span></span>
@@ -107,7 +113,7 @@
 <h3 id="highlight-mode">Highlight mode<a class="anchor" aria-label="anchor" href="#highlight-mode"></a>
 </h3>
 <p>Set <code>highlight_mode</code> to <code>TRUE</code> if you want a tile in which all images are dimmed except the one being hovered over, to emphasize individual packages interactively:</p>
-<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">hexsession</span><span class="fu">::</span><span class="fu"><a href="reference/make_tile.html">make_tile</a></span><span class="op">(</span>highlight_mode <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
 </div>
 <div class="section level3">
@@ -119,7 +125,7 @@
 <h3 id="dark-mode">Dark mode<a class="anchor" aria-label="anchor" href="#dark-mode"></a>
 </h3>
 <p>To draw the tiles on a dark background, set <code>dark_mode</code> to <code>TRUE</code> when creating or capturing your hex logos.</p>
-<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">hexsession</span><span class="fu">::</span><span class="fu"><a href="reference/make_tile.html">make_tile</a></span><span class="op">(</span>dark_mode <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
 <span><span class="fu">hexsession</span><span class="fu">::</span><span class="fu"><a href="reference/snap_tile.html">snap_tile</a></span><span class="op">(</span><span class="st">"test.png"</span>,dark_mode <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
 </div>
@@ -128,17 +134,16 @@
 <h2 id="user-provided-images-and-urls">User-provided images and urls<a class="anchor" aria-label="anchor" href="#user-provided-images-and-urls"></a>
 </h2>
 <p><code>make_tile</code> can now take vectors of additional images and their respective but optional urls to include in the hex grid.</p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" tabindex="-1"></a><span class="fu">make_tile</span>(<span class="at">packages =</span> <span class="fu">c</span>(<span class="st">"tidyterra"</span>, <span class="st">"sf"</span>), </span>
-<span id="cb6-2"><a href="#cb6-2" tabindex="-1"></a>          <span class="at">local_images =</span> <span class="fu">c</span>(<span class="st">"path/to/your/image1.png"</span>, </span>
-<span id="cb6-3"><a href="#cb6-3" tabindex="-1"></a>                           <span class="st">"path/to/your/image2.png"</span>,</span>
-<span id="cb6-4"><a href="#cb6-4" tabindex="-1"></a>          <span class="at">local_urls =</span> <span class="fu">c</span>(<span class="st">"https://an-example.web"</span>,  <span class="st">"https://another-example.com"</span>))</span>
-<span id="cb6-5"><a href="#cb6-5" tabindex="-1"></a>          </span></code></pre></div>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" tabindex="-1"></a><span class="fu">make_tile</span>(<span class="at">packages =</span> <span class="fu">c</span>(<span class="st">"tidyterra"</span>, <span class="st">"sf"</span>), </span>
+<span id="cb8-2"><a href="#cb8-2" tabindex="-1"></a>          <span class="at">local_images =</span> <span class="fu">c</span>(<span class="st">"path/to/your/image1.png"</span>, </span>
+<span id="cb8-3"><a href="#cb8-3" tabindex="-1"></a>                           <span class="st">"path/to/your/image2.png"</span>,</span>
+<span id="cb8-4"><a href="#cb8-4" tabindex="-1"></a>          <span class="at">local_urls =</span> <span class="fu">c</span>(<span class="st">"https://an-example.web"</span>,  <span class="st">"https://another-example.com"</span>))</span>
+<span id="cb8-5"><a href="#cb8-5" tabindex="-1"></a>          </span></code></pre></div>
 </div>
 <div class="section level2">
 <h2 id="notes">Notes<a class="anchor" aria-label="anchor" href="#notes"></a>
 </h2>
 <p>This package depends on working installations of magick and chromote, and thus requires a Chromium-based web browser (e.g., Chrome, Chromium, Opera, or Vivaldi) for <code><a href="reference/snap_tile.html">snap_tile()</a></code>.</p>
-<p>hexsession is very much work in progress and highly experimental. I am still learning good-practices for packages that create files and directories, use system commands, and launch browser sessions.</p>
 <p>All feedback is welcome in any form (issues, pull requests, etc.)</p>
 <div class="section level3">
 <h3 id="credit-and-llm-disclosure-statement">Credit and LLM disclosure statement<a class="anchor" aria-label="anchor" href="#credit-and-llm-disclosure-statement"></a>
@@ -153,6 +158,7 @@
   </main><aside class="col-md-3"><div class="links">
 <h2 data-toc-skip>Links</h2>
 <ul class="list-unstyled">
+<li><a href="https://cloud.r-project.org/package=hexsession" class="external-link">View on CRAN</a></li>
 <li><a href="https://github.com/luisDVA/hexsession/" class="external-link">Browse source code</a></li>
 <li><a href="https://github.com/luisDVA/hexsession/issues" class="external-link">Report a bug</a></li>
 </ul>
@@ -184,8 +190,10 @@
 <div class="dev-status">
 <h2 data-toc-skip>Dev status</h2>
 <ul class="list-unstyled">
-<li><a href="https://lifecycle.r-lib.org/articles/stages.html#experimental" class="external-link"><img src="https://img.shields.io/badge/lifecycle-experimental-orange.svg" alt="Lifecycle: experimental"></a></li>
 <li><a href="https://CRAN.R-project.org/package=hexsession" class="external-link"><img src="https://www.r-pkg.org/badges/version/hexsession" alt="CRAN status"></a></li>
+<li><a href="https://cran.r-project.org/package=hexsession" class="external-link"><img src="https://cranlogs.r-pkg.org/badges/hexsession" alt="CRAN downloads"></a></li>
+<li><a href="https://cran.r-project.org/package=hexsession" class="external-link"><img src="https://cranlogs.r-pkg.org/badges/grand-total/hexsession" alt="CRAN downloads total"></a></li>
+<li><a href="https://luisdva.r-universe.dev/hexsession" class="external-link"><img src="https://luisdva.r-universe.dev/badges/hexsession" alt="r-universe"></a></li>
 </ul>
 </div>
 
